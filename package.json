@@ -1,0 +1,23 @@
+{
+	"name": "craftos.d.ts",
+	"version": "1.0.0",
+	"description": "TypeScript definitions for transpiling to CraftOS-PC Lua",
+	"main": "craftos.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/LoganDark/craftos.d.ts.git"
+	},
+	"author": "LoganDark",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/LoganDark/craftos.d.ts/issues"
+	},
+	"homepage": "https://github.com/LoganDark/craftos.d.ts#readme",
+	"dependencies": {
+		"typescript": "^4.1.3",
+		"typescript-to-lua": "^0.36.1"
+	}
+}

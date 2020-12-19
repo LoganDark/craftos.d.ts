@@ -49,6 +49,23 @@ declare const colors: {
 	/** Tests whether color is contained within colors.
 	 * @noSelf */
 	test(set: colors.ColorSet, color: colors.Color): boolean
+
+	white: colors.Color
+	orange: colors.Color
+	magenta: colors.Color
+	lightBlue: colors.Color
+	yellow: colors.Color
+	lime: colors.Color
+	pink: colors.Color
+	gray: colors.Color
+	lightGray: colors.Color
+	cyan: colors.Color
+	purple: colors.Color
+	blue: colors.Color
+	brown: colors.Color
+	green: colors.Color
+	red: colors.Color
+	black: colors.Color
 }
 
 declare namespace command {

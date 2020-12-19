@@ -382,7 +382,7 @@ declare const fs: {
 
 	/** Deletes a file or directory.
 	 * @luaName delete */
-	_delete(this: void, path: string): void
+	'delete'(this: void, path: string): void
 
 	/** Combines two path components, returning a path consisting of the local path nested inside the base path. */
 	combine(this: void, basePath: string, localPath: string): string

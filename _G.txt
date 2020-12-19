@@ -87,7 +87,7 @@
 [x]         combine = function: 0x7fef87433fc0,
 [x]         complete = function: 0x7fef8760bf50,
 [x]         copy = function: 0x7fef87433f20,
-[-]         delete = function: 0x7fef87433f70,
+[x]         delete = function: 0x7fef87433f70,
 [x]         exists = function: 0x7fef87433d10,
 [x]         find = function: 0x7fef874343b0,
 [x]         getCapacity = function: 0x7fef87434130,

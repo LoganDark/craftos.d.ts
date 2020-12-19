@@ -1718,16 +1718,6 @@ declare const term: Term & {
 	native(): typeof term
 }
 
-// https://stackoverflow.com/a/65363297
-// @formatter:off
-type Alternating<T extends readonly any[], A, B> =
-	T extends readonly []
-	? T
-	: T extends readonly [A, B, ...infer T2]
-	  ? T2 extends Alternating<T2, A, B> ? T : never
-      : never
-// @formatter:on
-
 declare const textutils: {
 	/** Writes string text at current cursor position, character-by-character. Number argument rate is optional and is defaulted to 20. The higher the value of rate, the faster text is written (passing a value of 1 writes one character per second).
 	 * @noSelf */
@@ -1743,11 +1733,11 @@ declare const textutils: {
 
 	/** Prints tables in an ordered form. Each table is a row, the column width is auto-adjusted. If it encounters a number instead of a table then sets the text color to it.
 	 * @noSelf */
-	tabulate<T extends readonly any[]>(...things: Alternating<T, colors.Color, string[]>): void
+	tabulate(...things: (colors.Color | string[])[]): void
 
 	/** Prints tables in an ordered form, like textutils.tabulate. However, it waits for confirmation before scrolling down.
 	 * @noSelf */
-	pagedTabulate<T extends readonly any[]>(...things: Alternating<T, colors.Color, string[]>): void
+	pagedTabulate(...things: (colors.Color | string[])[]): void
 
 	/** Prints string text onto the screen, but waits for confirmation (after at least freeLines have been scrolled) before scrolling down further. Default for freeLines is 0.
 	 * @noSelf */

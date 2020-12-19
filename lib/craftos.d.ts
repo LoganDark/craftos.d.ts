@@ -55,7 +55,6 @@ declare namespace colors {
 	type ColorSet = number
 }
 
-/** @noSelf */
 declare const colors: {
 	/** Combines one or more colors (or sets of colors) into a larger set.
 	 * @noSelf @vararg */
@@ -68,6 +67,14 @@ declare const colors: {
 	/** Tests whether color is contained within colors.
 	 * @noSelf */
 	test(set: colors.ColorSet, color: colors.Color): boolean
+
+	/** Combine a three-color RGB value into one hexadecimal representation.
+	 * @noSelf */
+	packRGB(r: number, g: number, b: number): number
+
+	/** Separate a hexadecimal RGB color into its three constituent channels.
+	 * @noSelf @tupleReturn */
+	unpackRGB(rgb: number): [number, number, number]
 
 	white: colors.Color
 	orange: colors.Color

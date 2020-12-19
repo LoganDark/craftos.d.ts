@@ -21,33 +21,26 @@
  */
 
 declare const bit: {
-	/** Shifts a number left by a specified number of bits.
-	 * @noSelf */
-	blshift(n: number, bits: number): number
+	/** Shifts a number left by a specified number of bits. */
+	blshift(this: void, n: number, bits: number): number
 
-	/** Shifts a number right arithmetically by a specified number of bits.
-	 * @noSelf */
-	brshift(n: number, bits: number): number
+	/** Shifts a number right arithmetically by a specified number of bits. */
+	brshift(this: void, n: number, bits: number): number
 
-	/** Shifts a number right logically by a specified number of bits.
-	 * @noSelf */
-	blogic_rshift(n: number, bits: number): number
+	/** Shifts a number right logically by a specified number of bits. */
+	blogic_rshift(this: void, n: number, bits: number): number
 
-	/** Computes the bitwise exclusive OR of two numbers.
-	 * @noSelf */
-	bxor(m: number, n: number): number
+	/** Computes the bitwise exclusive OR of two numbers. */
+	bxor(this: void, m: number, n: number): number
 
-	/** Computes the bitwise inclusive OR of two numbers.
-	 * @noSelf */
-	bor(m: number, n: number): number
+	/** Computes the bitwise inclusive OR of two numbers. */
+	bor(this: void, m: number, n: number): number
 
-	/** Computes the bitwise AND of two numbers.
-	 * @noSelf */
-	band(m: number, n: number): number
+	/** Computes the bitwise AND of two numbers. */
+	band(this: void, m: number, n: number): number
 
-	/** Computes the bitwise NOT of a number.
-	 * @noSelf */
-	bnot(n: number): number
+	/** Computes the bitwise NOT of a number. */
+	bnot(this: void, n: number): number
 }
 
 declare namespace colors {
@@ -57,24 +50,22 @@ declare namespace colors {
 
 declare const colors: {
 	/** Combines one or more colors (or sets of colors) into a larger set.
-	 * @noSelf @vararg */
-	combine(...colors: colors.Color[]): colors.ColorSet
+	 * @vararg */
+	combine(this: void, ...colors: colors.Color[]): colors.ColorSet
 
 	/** Removes one or more colors (or sets of colors) from an initial set.
-	 * @noSelf @vararg */
-	subtract(set: colors.ColorSet, ...colors: colors.Color[]): colors.ColorSet
+	 * @vararg */
+	subtract(this: void, set: colors.ColorSet, ...colors: colors.Color[]): colors.ColorSet
 
-	/** Tests whether color is contained within colors.
-	 * @noSelf */
-	test(set: colors.ColorSet, color: colors.Color): boolean
+	/** Tests whether color is contained within colors. */
+	test(this: void, set: colors.ColorSet, color: colors.Color): boolean
 
-	/** Combine a three-color RGB value into one hexadecimal representation.
-	 * @noSelf */
-	packRGB(r: number, g: number, b: number): number
+	/** Combine a three-color RGB value into one hexadecimal representation. */
+	packRGB(this: void, r: number, g: number, b: number): number
 
 	/** Separate a hexadecimal RGB color into its three constituent channels.
-	 * @noSelf @tupleReturn */
-	unpackRGB(rgb: number): [number, number, number]
+	 * @tupleReturn */
+	unpackRGB(this: void, rgb: number): [number, number, number]
 
 	white: colors.Color
 	orange: colors.Color
@@ -110,34 +101,29 @@ declare namespace command {
 	}
 }
 
-/** @noSelf */
 declare const command: {
 	/** Executes the specified command, yields until the result is determined, then returns it.
-	 * @noSelf @tupleReturn */
-	exec(command: string): [boolean, string[]]
+	 * @tupleReturn */
+	exec(this: void, command: string): [boolean, string[]]
 
-	/** Executes the specified command, but doesn't yield. Queues a "task_complete" event after the command is executed.
-	 * @noSelf */
-	execAsync(command: string): command.TaskID
+	/** Executes the specified command, but doesn't yield. Queues a "task_complete" event after the command is executed. */
+	execAsync(this: void, command: string): command.TaskID
 
-	/** Returns a numerically indexed table filled with strings representing acceptable commands for commands.exec() / commands.execAsync().
-	 * @noSelf */
-	list(): string[]
+	/** Returns a numerically indexed table filled with strings representing acceptable commands for commands.exec() / commands.execAsync(). */
+	list(this: void): string[]
 
 	/** Returns the Minecraft world coordinates of the computer running the command.
-	 * @noSelf @tupleReturn */
-	getBlockPosition(): [number, number, number]
+	 * @tupleReturn */
+	getBlockPosition(this: void): [number, number, number]
 
-	/** Returns the Minecraft world coordinates of the computer running the command.
-	 * @noSelf */
-	getBlockInfo(x: number, y: number, z: number): command.BlockInfo
+	/** Returns the Minecraft world coordinates of the computer running the command. */
+	getBlockInfo(this: void, x: number, y: number, z: number): command.BlockInfo
 
 	/**
 	 * Available only to Command Computers, returns a numerically-indexed table containing information on the blocks within the specified world co-ordinates. Each sub-table is formatted per the output of commands.getBlockInfo().
 	 * A maximum of 4096 (2^12) blocks may be inspected at a time (for example, a 16x16x16 cube); the function will error if the block count exceeds this.
-	 * The blocks are returned in the order of lowest x-co-ord to highest x-co-ord, then lowest z-co-ord to highest z-co-ord, then lowest y-co-ord to highest y-co-ord; that is to say, west to east, then north to south, then lowest altitude to highest altitude.
-	 * @noSelf */
-	getBlocksInfo(x1: number, y1: number, z1: number, x2: number, y2: number, z2: number): command.BlockInfo[]
+	 * The blocks are returned in the order of lowest x-co-ord to highest x-co-ord, then lowest z-co-ord to highest z-co-ord, then lowest y-co-ord to highest y-co-ord; that is to say, west to east, then north to south, then lowest altitude to highest altitude. */
+	getBlocksInfo(this: void, x1: number, y1: number, z1: number, x2: number, y2: number, z2: number): command.BlockInfo[]
 }
 
 type coroutine = {readonly '': unique symbol}
@@ -154,24 +140,21 @@ declare const coroutine: {
 	create(f: Function): coroutine
 
 	/** Starts or resumes a coroutine.
-	 * @noSelf @vararg @tupleReturn */
-	resume(coro: coroutine, ...values: any[]): any[]
+	 * @vararg @tupleReturn */
+	resume(this: void, coro: coroutine, ...values: any[]): any[]
 
-	/** Returns the currently executing coroutine.
-	 * @noSelf  */
-	running(): coroutine
+	/** Returns the currently executing coroutine. */
+	running(this: void): coroutine
 
-	/** Returns the status of coro.
-	 * @noSelf */
-	status(coro: coroutine): coroutine.Status
+	/** Returns the status of coro. */
+	status(this: void, coro: coroutine): coroutine.Status
 
-	/** Creates a new coroutine and wraps it in a function.
-	 * @noSelf */
-	wrap<T extends (...args: any) => any>(f: T): coroutine.Resumer<T>
+	/** Creates a new coroutine and wraps it in a function. */
+	wrap<T extends (...args: any) => any>(this: void, f: T): coroutine.Resumer<T>
 
 	/** Pauses the currently executing coroutine and passes control to its caller.
-	 * @noSelf @vararg @tupleReturn */
-	yield(...args: any): any[]
+	 * @vararg @tupleReturn */
+	yield(this: void, ...args: any): any[]
 }
 
 declare type Side = 'front' | 'back' | 'left' | 'right' | 'top' | 'bottom'
@@ -182,49 +165,38 @@ declare namespace disk {
 }
 
 declare const disk: {
-	/** Checks whether any item is in a disk drive.
-	 * @noSelf */
-	isPresent(side: peripheral.Name): boolean
+	/** Checks whether any item is in a disk drive. */
+	isPresent(this: void, side: peripheral.Name): boolean
 
-	/** Checks whether a Floppy Disk is in a disk drive.
-	 * @noSelf */
-	hasData(side: peripheral.Name): boolean
+	/** Checks whether a Floppy Disk is in a disk drive. */
+	hasData(this: void, side: peripheral.Name): boolean
 
-	/** Gets the directory name where the contents of the floppy disk can be accessed.
-	 * @noSelf */
-	getMountPath(side: peripheral.Name): string | undefined
+	/** Gets the directory name where the contents of the floppy disk can be accessed. */
+	getMountPath(this: void, side: peripheral.Name): string | undefined
 
-	/** Sets the floppy disk's label.
-	 * @noSelf */
-	setLabel(side: peripheral.Name, label: string): void
+	/** Sets the floppy disk's label. */
+	setLabel(this: void, side: peripheral.Name, label: string): void
 
-	/** Gets the floppy disk's label.
-	 * @noSelf */
-	getLabel(side: peripheral.Name): string | undefined
+	/** Gets the floppy disk's label. */
+	getLabel(this: void, side: peripheral.Name): string | undefined
 
-	/** Gets the floppy disk's unique ID number.
-	 * @noSelf */
-	getID(side: peripheral.Name): disk.DiskID | undefined
+	/** Gets the floppy disk's unique ID number. */
+	getID(this: void, side: peripheral.Name): disk.DiskID | undefined
 
-	/** Checks whether a music disk is in the drive.
-	 * @noSelf */
-	hasAudio(side: peripheral.Name): boolean
+	/** Checks whether a music disk is in the drive. */
+	hasAudio(this: void, side: peripheral.Name): boolean
 
-	/** Gets the title of the music disc in the drive.
-	 * @noSelf */
-	getAudioTitle(side: peripheral.Name): string | undefined
+	/** Gets the title of the music disc in the drive. */
+	getAudioTitle(this: void, side: peripheral.Name): string | undefined
 
-	/** Starts playing the music disc in the drive.
-	 * @noSelf */
-	playAudio(side: peripheral.Name): void
+	/** Starts playing the music disc in the drive. */
+	playAudio(this: void, side: peripheral.Name): void
 
-	/** Stops playing the music disc in the drive.
-	 * @noSelf */
-	playAudio(side: peripheral.Name): void
+	/** Stops playing the music disc in the drive. */
+	playAudio(this: void, side: peripheral.Name): void
 
-	/** Ejects any item currently in the drive, spilling it into the world as a loose item.
-	 * @noSelf */
-	eject(side: peripheral.Name): void
+	/** Ejects any item currently in the drive, spilling it into the world as a loose item. */
+	eject(this: void, side: peripheral.Name): void
 
 	// CRAFTOS-PC //////////////////////////////////////////////////////////////
 
@@ -233,51 +205,45 @@ declare const disk: {
 	 * @param path Either a disk ID or path to load.
 	 * If number: Mounts the floppy disk (<save dir>/computer/disk/<id>) to /disk[n]
 	 * If path to directory: Mounts the real path specified to /disk[n]
-	 * If path to file: Loads the file as an audio disc (use disk.playAudio or the "dj" command)
-	 * @noSelf */
-	insertDisk(path: string | number): void
+	 * If path to file: Loads the file as an audio disc (use disk.playAudio or the "dj" command) */
+	insertDisk(this: void, path: string | number): void
 }
 
 declare namespace fs {
 	type OpenMode = 'r' | 'w' | 'a' | 'rb' | 'wb' | 'ab'
 
-	/** @noSelf */
 	interface File {
 		/** Closes the file handle, after which it can no longer be used */
-		close(): void
+		close(this: void): void
 	}
 
-	/** @noSelf */
 	interface FileRead extends File {
 		/** Reads the next line from the file */
-		readLine(): string | undefined
+		readLine(this: void): string | undefined
 
 		/** Reads the all the text in the file */
-		readAll(): string
+		readAll(this: void): string
 	}
 
-	/** @noSelf */
 	interface FileReadBinary extends File {
 		/** Reads a single byte from the file and returns it */
-		read(): number | undefined
+		read(this: void): number | undefined
 	}
 
-	/** @noSelf */
 	interface FileWrite extends File {
 		/** Writes a string of characters to the file exactly as they appear in the string data */
-		write(data: string): void
+		write(this: void, data: string): void
 
 		/** Writes a string of characters to the file, then appends an end-of-line character */
-		writeLine(line: string): void
+		writeLine(this: void, line: string): void
 
 		/** Flushes the data to the specified file. (keeps the handle available afterwards) */
-		flush(): void
+		flush(this: void): void
 	}
 
-	/** @noSelf */
 	interface FileWriteBinary extends File {
 		/** Writes a single byte into the file */
-		write(byte: number): void
+		write(this: void, byte: number): void
 	}
 
 	// CC:TWEAKED //////////////////////////////////////////////////////////////
@@ -291,85 +257,67 @@ declare namespace fs {
 }
 
 declare const fs: {
-	/** Returns a list of all the files (including subdirectories but not their contents) contained in a directory, as a numerically indexed table.
-	 * @noSelf */
-	list(path: string): string[]
+	/** Returns a list of all the files (including subdirectories but not their contents) contained in a directory, as a numerically indexed table. */
+	list(this: void, path: string): string[]
 
-	/** Checks if a path refers to an existing file or directory.
-	 * @noSelf */
-	exists(path: string): boolean
+	/** Checks if a path refers to an existing file or directory. */
+	exists(this: void, path: string): boolean
 
-	/** Checks if a path refers to an existing directory.
-	 * @noSelf */
-	isDir(path: string): boolean
+	/** Checks if a path refers to an existing directory. */
+	isDir(this: void, path: string): boolean
 
-	/** Checks if a path is read-only (i.e. cannot be modified).
-	 * @noSelf */
-	isReadOnly(path: string): boolean
+	/** Checks if a path is read-only (i.e. cannot be modified). */
+	isReadOnly(this: void, path: string): boolean
 
-	/** Gets the final component of a pathname.
-	 * @noSelf */
-	getName(path: string): string
+	/** Gets the final component of a pathname. */
+	getName(this: void, path: string): string
 
-	/** Gets the storage medium holding a path, or nil if the path does not exist.
-	 * @noSelf */
-	getDrive(path: string): string | undefined
+	/** Gets the storage medium holding a path, or nil if the path does not exist. */
+	getDrive(this: void, path: string): string | undefined
 
-	/** Gets the size of a file in bytes.
-	 * @noSelf */
-	getSize(path: string): number
+	/** Gets the size of a file in bytes. */
+	getSize(this: void, path: string): number
 
-	/** Gets the remaining space on the drive containing the given directory.
-	 * @noSelf */
-	getFreeSpace(path: string): number
+	/** Gets the remaining space on the drive containing the given directory. */
+	getFreeSpace(this: void, path: string): number
 
-	/** Makes a directory.
-	 * @noSelf */
-	makeDir(path: string): void
+	/** Makes a directory. */
+	makeDir(this: void, path: string): void
 
-	/** Moves a file or directory to a new location.
-	 * @noSelf */
-	move(fromPath: string, toPath: string): void
+	/** Moves a file or directory to a new location. */
+	move(this: void, fromPath: string, toPath: string): void
 
-	/** Copies a file or directory to a new location.
-	 * @noSelf */
-	copy(fromPath: string, toPath: string): void
+	/** Copies a file or directory to a new location. */
+	copy(this: void, fromPath: string, toPath: string): void
 
 	/** Deletes a file or directory.
-	 * @noSelf @luaName delete */
-	_delete(path: string): void
+	 * @luaName delete */
+	_delete(this: void, path: string): void
 
-	/** Combines two path components, returning a path consisting of the local path nested inside the base path.
-	 * @noSelf */
-	combine(basePath: string, localPath: string): string
+	/** Combines two path components, returning a path consisting of the local path nested inside the base path. */
+	combine(this: void, basePath: string, localPath: string): string
 
-	/** Opens a file so it can be read.
-	 * @noSelf */
-	open(path: string, mode: 'r'): fs.FileRead
+	/** Opens a file so it can be read. */
+	open(this: void, path: string, mode: 'r'): fs.FileRead
 
-	/** Opens a file so it can be written.
-	 * @noSelf */
-	open(path: string, mode: 'w' | 'a'): fs.FileWrite
+	/** Opens a file so it can be written. */
+	open(this: void, path: string, mode: 'w' | 'a'): fs.FileWrite
 
-	/** Opens a file so it can be read.
-	 * @noSelf */
-	open(path: string, mode: 'rb'): fs.FileReadBinary
+	/** Opens a file so it can be read. */
+	open(this: void, path: string, mode: 'rb'): fs.FileReadBinary
 
-	/** Opens a file so it can be written.
-	 * @noSelf */
-	open(path: string, mode: 'wb' | 'ab'): fs.FileWriteBinary
+	/** Opens a file so it can be written. */
+	open(this: void, path: string, mode: 'wb' | 'ab'): fs.FileWriteBinary
 
-	/** Searches the computer's files using wildcards.
-	 * @noSelf */
-	find(wildcard: string): fs.File[]
+	/** Searches the computer's files using wildcards. */
+	find(this: void, wildcard: string): fs.File[]
 
-	/** Returns the parent directory of path.
-	 * @noSelf */
-	getDir(path: string): string
+	/** Returns the parent directory of path. */
+	getDir(this: void, path: string): string
 
-	/** Returns a list of strings that could be combined with the provided name to produce valid entries in the specified folder.
-	 * @noSelf */
+	/** Returns a list of strings that could be combined with the provided name to produce valid entries in the specified folder. */
 	complete(
+		this: void,
 		partialName: string,
 		ancestry: string,
 		includeFiles?: boolean,
@@ -378,107 +326,89 @@ declare const fs: {
 
 	// CC:TWEAKED //////////////////////////////////////////////////////////////
 
-	/** Returns true if a path is mounted to the parent filesystem.
-	 * @noSelf */
-	isDriveRoot(path: string): boolean
+	/** Returns true if a path is mounted to the parent filesystem. */
+	isDriveRoot(this: void, path: string): boolean
 
-	/** Returns this drive's capacity. This will be nil for "read-only" drives, such as the ROM or treasure disks.
-	 * @noSelf */
-	getCapacity(path: string): boolean
+	/** Returns this drive's capacity. This will be nil for "read-only" drives, such as the ROM or treasure disks. */
+	getCapacity(this: void, path: string): boolean
 
-	/** Get attributes about a specific file or folder.
-	 * @noSelf */
-	attributes(path: string): fs.Attributes
+	/** Get attributes about a specific file or folder. */
+	attributes(this: void, path: string): fs.Attributes
 }
 
-/** @noSelf */
 declare const gps: {
 	/** Tries to retrieve the computer or turtles own location. On success, returns the location of the turtle’s modem. On failure (if no responses are received for timeout seconds, by default 2), returns nil. If debug is true, debug messages are printed.
 	 * @tupleReturn */
-	locate(timeout: number, debug?: boolean): [number, number, number] | [undefined]
+	locate(this: void, timeout: number, debug?: boolean): [number, number, number] | [undefined]
 }
 
 declare const help: {
-	/** Returns the list of locations the API will look in for help files. This is returned in the form of a string containing multiple search paths separated by colons.
-	 * @noSelf */
-	path(): string
+	/** Returns the list of locations the API will look in for help files. This is returned in the form of a string containing multiple search paths separated by colons. */
+	path(this: void): string
 
-	/** Sets the list of locations the API will look in for help files. This should be a string containing one or more search paths separated by colons.
-	 * @noSelf */
-	setPath(path: string): void
+	/** Sets the list of locations the API will look in for help files. This should be a string containing one or more search paths separated by colons. */
+	setPath(this: void, path: string): void
 
-	/** Returns the path to the file containing the help page for topic, or nil if the topic cannot be found.
-	 * @noSelf */
-	lookup(topic: string): string | undefined
+	/** Returns the path to the file containing the help page for topic, or nil if the topic cannot be found. */
+	lookup(this: void, topic: string): string | undefined
 
-	/** Returns a list of all available help topics.
-	 * @noSelf */
-	topics(): string[]
+	/** Returns a list of all available help topics. */
+	topics(this: void): string[]
 
-	/** Returns a list of suffixes that can be concatenated with the prefix to get valid topic titles.
-	 * @noSelf */
-	completeTopic(prefix: string): string[]
+	/** Returns a list of suffixes that can be concatenated with the prefix to get valid topic titles. */
+	completeTopic(this: void, prefix: string): string[]
 }
 
 declare namespace http {
-	/** @noSelf */
 	interface Response extends fs.FileRead {
 		/** Returns the numerical HTTP response code sent by the server */
-		getResponseCode(): number
+		getResponseCode(this: void): number
 	}
 
-	/** @noSelf */
 	interface CpcRequest extends fs.FileRead {
 		/** Returns the URI endpoint of the request */
-		getURL(): string
+		getURL(this: void): string
 
 		/** Returns the HTTP method of the request */
-		getMethod(): string
+		getMethod(this: void): string
 
 		/** Returns a table of headers sent by the client */
-		getRequestHeaders(): Map<string, string>
+		getRequestHeaders(this: void): Map<string, string>
 	}
 
-	/** @noSelf */
 	interface CpcResponse extends fs.FileWrite {
 		/** Sets the HTTP response code to send */
-		setStatusCode(code: number): void
+		setStatusCode(this: void, code: number): void
 
 		/** Sets a header value to send */
-		setResponseHeader(key: string, value: string): void
+		setResponseHeader(this: void, key: string, value: string): void
 	}
 }
 
 declare const http: {
-	/** Sends a HTTP request to a website, asynchronously.
-	 * @noSelf */
-	request(url: string, postData?: string, headers?: Map<string, string>): void
+	/** Sends a HTTP request to a website, asynchronously. */
+	request(this: void, url: string, postData?: string, headers?: Map<string, string>): void
 
-	/** Sends a HTTP GET request to a website, synchronously.
-	 * @noSelf */
-	get(url: string, headers?: Map<string, string>): http.Response
+	/** Sends a HTTP GET request to a website, synchronously. */
+	get(this: void, url: string, headers?: Map<string, string>): http.Response
 
-	/** Sends a HTTP POST request to a website, synchronously.
-	 * @noSelf */
-	post(url: string, postData?: string, headers?: Map<string, string>): http.Response
+	/** Sends a HTTP POST request to a website, synchronously. */
+	post(this: void, url: string, postData?: string, headers?: Map<string, string>): http.Response
 
 	/** Checks if a URL is valid and is included in the HTTP whitelist.
-	 * @noSelf @tupleReturn */
-	checkURL(url: string): [true] | [false, string]
+	 * @tupleReturn */
+	checkURL(this: void, url: string): [true] | [false, string]
 
 	////////////////////////////////////////////////////////////////////////////
 
-	/** Adds a listener on a port.
-	 * @noSelf */
-	addListener(port: number): void
+	/** Adds a listener on a port. */
+	addListener(this: void, port: number): void
 
-	/** Frees a port to be listened on again later.
-	 * @noSelf */
-	removeListener(port: number): void
+	/** Frees a port to be listened on again later. */
+	removeListener(this: void, port: number): void
 
-	/** Starts a server on a port and calls a function when a request is made.
-	 * @noSelf */
-	listen(port: number, callback: (req: http.CpcRequest, res: http.CpcResponse) => void): void
+	/** Starts a server on a port and calls a function when a request is made. */
+	listen(this: void, port: number, callback: (req: http.CpcRequest, res: http.CpcResponse) => void): void
 }
 
 declare namespace io {
@@ -514,33 +444,29 @@ declare namespace io {
 	}
 }
 
-/** @noSelf */
 declare const io: {
 	/** Equivalent to file:close(). Without a file, closes the default output file.
-	 * @noSelf @tupleReturn */
-	close(file?: io.file): [any] | [undefined, string]
+	 * @tupleReturn */
+	close(this: void, file?: io.file): [any] | [undefined, string]
 
 	/** Equivalent to file:flush over the default output file.
-	 * @noSelf @tupleReturn */
-	flush(): [any] | [undefined, string]
+	 * @tupleReturn */
+	flush(this: void,): [any] | [undefined, string]
 
 	/**
 	 * Opens the named file (in text mode), and sets its handle as the default input file.
-	 * In case of errors this function raises the error, instead of returning an error code.
-	 * @noSelf */
-	input(filename: string): void
+	 * In case of errors this function raises the error, instead of returning an error code. */
+	input(this: void, filename: string): void
 
 	/**
 	 * Sets this file handle as the default input file.
-	 * In case of errors this function raises the error, instead of returning an error code.
-	 * @noSelf */
-	input(file: io.file): void
+	 * In case of errors this function raises the error, instead of returning an error code. */
+	input(this: void, file: io.file): void
 
 	/**
 	 * Returns the current default input file.
-	 * In case of errors this function raises the error, instead of returning an error code.
-	 * @noSelf */
-	input(): io.file
+	 * In case of errors this function raises the error, instead of returning an error code. */
+	input(this: void): io.file
 
 	/**
 	 * Opens the given file name in read mode and returns an iterator function that, each time it is called, returns a new line from the file. Therefore, the construction
@@ -549,8 +475,8 @@ declare const io: {
 	 * ```
 	 * will iterate over all lines of the file. When the iterator function detects the end of file, it returns nil (to finish the loop) and automatically closes the file.
 	 * The call io.lines() (with no file name) is equivalent to io.input():lines(); that is, it iterates over the lines of the default input file. In this case it does not close the file when the loop ends.
-	 * @noSelf @tupleReturn */
-	lines(filename?: string): [Iterator<string>] | [undefined, string]
+	 * @tupleReturn */
+	lines(this: void, filename?: string): [Iterator<string>] | [undefined, string]
 
 	/**
 	 * This function opens a file, in the mode specified in the string mode. It returns a new file handle, or, in case of errors, nil plus an error message.
@@ -560,36 +486,33 @@ declare const io: {
 	 * - "a": append mode;
 	 *
 	 * The mode string can also have a 'b' at the end, which is needed in some systems to open the file in binary mode. This string is exactly what is used in the standard C function fopen.
-	 * @noSelf @tupleReturn */
+	 * @tupleReturn */
 	open(
+		this: void,
 		filename: string,
 		mode?: 'r' | 'w' | 'a' |
 			'rb' | 'wb' | 'ab'
 	): [io.file] | [undefined, string]
 
-	/** Similar to io.input, but operates over the default output file.
-	 * @noSelf */
-	output(filename: string): void
+	/** Similar to io.input, but operates over the default output file. */
+	output(this: void, filename: string): void
 
-	/** Similar to io.input, but operates over the default output file.
-	 * @noSelf */
-	output(file: io.file): void
+	/** Similar to io.input, but operates over the default output file. */
+	output(this: void, file: io.file): void
 
-	/** Similar to io.input, but operates over the default output file.
-	 * @noSelf */
-	output(): io.file
+	/** Similar to io.input, but operates over the default output file. */
+	output(this: void): io.file
 
 	/** Equivalent to io.input():read.
-	 * @noSelf @vararg @tupleReturn */
-	read(format?: '*l'): [string] | [undefined, string]
+	 * @vararg @tupleReturn */
+	read(this: void, format?: '*l'): [string] | [undefined, string]
 
-	/** Checks whether obj is a valid file handle. Returns the string "file" if obj is an open file handle, "closed file" if obj is a closed file handle, or nil if obj is not a file handle.
-	 * @noSelf */
-	type(obj: any): 'file' | 'closed file' | undefined
+	/** Checks whether obj is a valid file handle. Returns the string "file" if obj is an open file handle, "closed file" if obj is a closed file handle, or nil if obj is not a file handle. */
+	type(this: void, obj: any): 'file' | 'closed file' | undefined
 
 	/** Equivalent to io.output():write.
-	 * @noSelf @tupleReturn */
-	write(value: string | number): [any] | [undefined, string]
+	 * @tupleReturn */
+	write(this: void, value: string | number): [any] | [undefined, string]
 }
 
 declare namespace keys {
@@ -597,9 +520,8 @@ declare namespace keys {
 }
 
 declare const keys: {
-	/** Translates a numerical key code to a human-readable name.
-	 * @noSelf */
-	getName(code: keys.KeyCode): string | undefined
+	/** Translates a numerical key code to a human-readable name. */
+	getName(this: void, code: keys.KeyCode): string | undefined
 
 	one: keys.KeyCode
 	two: keys.KeyCode
@@ -720,125 +642,100 @@ declare const keys: {
 }
 
 declare const math: {
-	/** Returns the absolute value of x.
-	 * @noSelf */
-	abs(x: number): number
+	/** Returns the absolute value of x. */
+	abs(this: void, x: number): number
 
-	/** Returns the arc cosine of x (in radians).
-	 * @noSelf */
-	acos(x: number): number
+	/** Returns the arc cosine of x (in radians). */
+	acos(this: void, x: number): number
 
-	/** Returns the arc sine of x (in radians).
-	 * @noSelf */
-	asin(x: number): number
+	/** Returns the arc sine of x (in radians). */
+	asin(this: void, x: number): number
 
-	/** Returns the arc tangent of x (in radians).
-	 * @noSelf */
-	atan(x: number): number
+	/** Returns the arc tangent of x (in radians). */
+	atan(this: void, x: number): number
 
-	/** Returns the arc tangent of y/x (in radians), but uses the signs of both parameters to find the quadrant of the result. (It also handles correctly the case of x being zero.)
-	 * @noSelf */
-	atan2(y: number, x: number): number
+	/** Returns the arc tangent of y/x (in radians), but uses the signs of both parameters to find the quadrant of the result. (It also handles correctly the case of x being zero.) */
+	atan2(this: void, y: number, x: number): number
 
-	/** Returns the smallest integer larger than or equal to x.
-	 * @noSelf */
-	ceil(x: number): number
+	/** Returns the smallest integer larger than or equal to x. */
+	ceil(this: void, x: number): number
 
-	/** Returns the cosine of x (assumed to be in radians).
-	 * @noSelf */
-	cos(x: number): number
+	/** Returns the cosine of x (assumed to be in radians). */
+	cos(this: void, x: number): number
 
-	/** Returns the hyperbolic cosine of x.
-	 * @noSelf */
-	cosh(x: number): number
+	/** Returns the hyperbolic cosine of x. */
+	cosh(this: void, x: number): number
 
-	/** Returns the angle x (given in radians) in degrees.
-	 * @noSelf */
-	deg(x: number): number
+	/** Returns the angle x (given in radians) in degrees. */
+	deg(this: void, x: number): number
 
-	/** Returns the value ex.
-	 * @noSelf */
-	exp(x: number): number
+	/** Returns the value ex. */
+	exp(this: void, x: number): number
 
-	/** Returns the largest integer smaller than or equal to x.
-	 * @noSelf */
-	floor(x: number): number
+	/** Returns the largest integer smaller than or equal to x. */
+	floor(this: void, x: number): number
 
-	/** Returns the remainder of the division of x by y that rounds the quotient towards zero.
-	 * @noSelf */
-	fmod(x: number, y: number): number
+	/** Returns the remainder of the division of x by y that rounds the quotient towards zero. */
+	fmod(this: void, x: number, y: number): number
 
-	/** Returns m and e such that x = m2e, e is an integer and the absolute value of m is in the range [0.5, 1) (or zero when x is zero).
-	 * @noSelf */
-	frexp(x: number): number
+	/** Returns m and e such that x = m2e, e is an integer and the absolute value of m is in the range [0.5, 1) (or zero when x is zero). */
+	frexp(this: void, x: number): number
 
 	/** The value HUGE_VAL, a value larger than or equal to any other numerical value. */
 	huge: number
 
-	/** Returns m2e (e should be an integer).
-	 * @noSelf */
-	ldexp(m: number, e: number): number
+	/** Returns m2e (e should be an integer). */
+	ldexp(this: void, m: number, e: number): number
 
-	/** Returns the natural logarithm of x.
-	 * @noSelf */
-	log(x: number): number
+	/** Returns the natural logarithm of x. */
+	log(this: void, x: number): number
 
-	/** Returns the base-10 logarithm of x.
-	 * @noSelf */
-	log10(x: number): number
+	/** Returns the base-10 logarithm of x. */
+	log10(this: void, x: number): number
 
 	/** Returns the maximum value among its arguments.
-	 * @noSelf @vararg */
-	max(...numbers: number[]): number
+	 * @vararg */
+	max(this: void, ...numbers: number[]): number
 
 	/** Returns the minimum value among its arguments.
-	 * @noSelf @vararg */
-	min(...numbers: number[]): number
+	 * @vararg */
+	min(this: void, ...numbers: number[]): number
 
 	/** Returns two numbers, the integral part of x and the fractional part of x.
-	 * @noSelf @tupleReturn */
-	modf(x: number): [number, number]
+	 * @tupleReturn */
+	modf(this: void, x: number): [number, number]
 
 	/** The value of pi. */
 	pi: number
 
-	/** Returns xy. (You can also use the expression x^y to compute this value.)
-	 * @noSelf */
-	pow(x: number, y: number): number
+	/** Returns xy. (You can also use the expression x^y to compute this value.) */
+	pow(this: void, x: number, y: number): number
 
-	/** Returns the angle x (given in degrees) in radians.
-	 * @noSelf */
-	rad(x: number): number
+	/** Returns the angle x (given in degrees) in radians. */
+	rad(this: void, x: number): number
 
 	/**
 	 * This function is an interface to the simple pseudo-random generator function rand provided by ANSI C. (No guarantees can be given for its statistical properties.)
-	 * When called without arguments, returns a uniform pseudo-random real number in the range [0,1). When called with an integer number m, math.random returns a uniform pseudo-random integer in the range [1, m]. When called with two integer numbers m and n, function random returns a uniform pseudo-random integer in the range [m, n].
-	 * @noSelf */
-	random(m?: number, n?: number): number
+	 * When called without arguments, returns a uniform pseudo-random real number in the range [0,1). When called with an integer number m, math.random returns a uniform pseudo-random integer in the range [1, m]. When called with two integer numbers m and n, function random returns a uniform pseudo-random integer in the range [m, n]. */
+	random(this: void, m?: number, n?: number): number
 
-	/** Sets x as the "seed" for the pseudo-random generator: equal seeds produce equal sequences of numbers.
-	 * @noSelf */
-	randomseed(x: number): void
+	/** Sets x as the "seed" for the pseudo-random generator: equal seeds produce equal sequences of numbers. */
+	randomseed(this: void, x: number): void
 
-	/** Returns the sine of x (assumed to be in radians).
-	 * @noSelf */
-	sin(x: number): number
+	/** Returns the sine of x (assumed to be in radians). */
+	sin(this: void, x: number): number
 
-	/** Returns the hyperbolic sine of x.
-	 * @noSelf */
-	sinh(x: number): number
+	/** Returns the hyperbolic sine of x. */
+	sinh(this: void, x: number): number
 
-	/** Returns the square root of x. (You can also use the expression x^0.5 to compute this value.)
-	 * @noSelf */
-	sqrt(x: number): number
+	/** Returns the square root of x. (You can also use the expression x^0.5 to compute this value.) */
+	sqrt(this: void, x: number): number
 
-	/** Returns the tangent of x (assumed to be in radians).
-	 * @noSelf */
-	tan(x: number): number
+	/** Returns the tangent of x (assumed to be in radians). */
+	tan(this: void, x: number): number
 
-	/** Returns the hyperbolic tangent of x.
-	 * @noSelf */
-	tanh(x: number): number
+	/** Returns the hyperbolic tangent of x. */
+	tanh(this: void, x: number): number
 }
 
 declare namespace multishell {
@@ -846,33 +743,27 @@ declare namespace multishell {
 }
 
 declare const multishell: {
-	/** Returns the ID of the currently running tab.
-	 * @noSelf */
-	getCurrent(): multishell.TabID
+	/** Returns the ID of the currently running tab. */
+	getCurrent(this: void): multishell.TabID
 
-	/** Returns the number of tabs currently being handled by the multishell system.
-	 * @noSelf */
-	getCount(): number
+	/** Returns the number of tabs currently being handled by the multishell system. */
+	getCount(this: void): number
 
 	/** Launches the specified script in a new tab.
-	 * @noSelf @vararg */
-	launch(environment: Map<string, any>, programPath: string, ...arguments: string[]): multishell.TabID
+	 * @vararg */
+	launch(this: void, environment: Map<string, any>, programPath: string, ...arguments: string[]): multishell.TabID
 
-	/** Switches focus to the specified tab.
-	 * @noSelf */
-	setFocus(tabID: multishell.TabID): boolean
+	/** Switches focus to the specified tab. */
+	setFocus(this: void, tabID: multishell.TabID): boolean
 
-	/** Relabels the specified tab to use the specified title.
-	 * @noSelf */
-	setTitle(tabID: multishell.TabID, title: string): void
+	/** Relabels the specified tab to use the specified title. */
+	setTitle(this: void, tabID: multishell.TabID, title: string): void
 
-	/** Returns the title of the specified tab.
-	 * @noSelf */
-	getTitle(tabID: multishell.TabID): string
+	/** Returns the title of the specified tab. */
+	getTitle(this: void, tabID: multishell.TabID): string
 
-	/** Returns the ID of the currently focused tab.
-	 * @noSelf */
-	getFocus(): multishell.TabID
+	/** Returns the ID of the currently focused tab. */
+	getFocus(this: void): multishell.TabID
 }
 
 declare namespace os {
@@ -950,90 +841,73 @@ declare namespace os {
 }
 
 declare const os: {
-	/** Returns the version of the OS the computer is running, which (for CraftOS) also contains the version of ComputerCraft.
-	 * @noSelf */
-	version(): string
+	/** Returns the version of the OS the computer is running, which (for CraftOS) also contains the version of ComputerCraft. */
+	version(this: void): string
 
-	/** Returns the unique ID of this computer. os.computerID() also behaves exactly the same as os.getComputerID().
-	 * @noSelf */
-	getComputerID(): number
+	/** Returns the unique ID of this computer. os.computerID() also behaves exactly the same as os.getComputerID(). */
+	getComputerID(this: void): number
 
-	/** Returns the label of this computer. os.computerLabel() also behaves exactly the same as os.getComputerLabel().
-	 * @noSelf */
-	getComputerLabel(): string | undefined
+	/** Returns the label of this computer. os.computerLabel() also behaves exactly the same as os.getComputerLabel(). */
+	getComputerLabel(this: void): string | undefined
 
-	/** Set the label of this computer.
-	 * @noSelf */
-	setComputerLabel(label: string | undefined): void
+	/** Set the label of this computer. */
+	setComputerLabel(this: void, label: string | undefined): void
 
 	/** An advanced way of starting programs. A started program will have a given environment table which determines what functions it has available, as well as any variables it will be able to access by default. You may prefer to use the Shell (API) unless you need to do something special.
-	 * @noSelf @vararg */
-	run(environment: Map<string, any>, programPath: string, ...arguments: string[]): boolean
+	 * @vararg */
+	run(this: void, environment: Map<string, any>, programPath: string, ...arguments: string[]): boolean
 
-	/** Loads a Lua script as an API in its own namespace. It will be available to all programs that run on the terminal.
-	 * @noSelf */
-	loadAPI(path: string): boolean
+	/** Loads a Lua script as an API in its own namespace. It will be available to all programs that run on the terminal. */
+	loadAPI(this: void, path: string): boolean
 
-	/** Unloads a previously loaded API.
-	 * @noSelf */
-	unloadAPI(name: string): void
+	/** Unloads a previously loaded API. */
+	unloadAPI(this: void, name: string): void
 
 	/** Blocks until the computer receives an event, or if target-event is specified, will block until an instance of target-event occurs. os.pullEvent(target-event) returns the event and any parameters the event may have. If a target-event is specified, the computer will not break for any other events (except termination).
-	 * @noSelf @tupleReturn */
-	pullEvent<K extends keyof os.Events>(filter: K): os.Events[K]
+	 * @tupleReturn */
+	pullEvent<K extends keyof os.Events>(this: void, filter: K): os.Events[K]
 
 	/** Advanced version of pullEvent(). Blocks until the computer receives an event, or if target-event is specified, will block until an instance of target-event occurs. os.pullEventRaw(target-event) returns the event and any parameters the event may have. Unlike os.pullEvent(target-event), this function will not raise an error if a 'terminate' event is received.
-	 * @noSelf @tupleReturn */
-	pullEventRaw<K extends keyof os.Events>(filter: K): os.Events[K]
+	 * @tupleReturn */
+	pullEventRaw<K extends keyof os.Events>(this: void, filter: K): os.Events[K]
 
 	/** Adds an event to the event queue with the name event and the given parameters.
-	 * @noSelf @vararg */
-	queueEvent<K extends keyof os.Events>(name: K, ...args: os.Events[K]): void
+	 * @vararg */
+	queueEvent<K extends keyof os.Events>(this: void, name: K, ...args: os.Events[K]): void
 
-	/** Returns the amount of time since the in-game computer was started.
-	 * @noSelf */
-	clock(): number
+	/** Returns the amount of time since the in-game computer was started. */
+	clock(this: void): number
 
-	/** Queues an event to be triggered after a number of seconds (timeout). The ID of the timer is returned from this function to differentiate multiple timers. Timers are one-shot; once they have fired an event you will need to start another one if you need a recurring timer.
-	 * @noSelf */
-	startTimer(timeout: number): os.TimerID
+	/** Queues an event to be triggered after a number of seconds (timeout). The ID of the timer is returned from this function to differentiate multiple timers. Timers are one-shot; once they have fired an event you will need to start another one if you need a recurring timer. */
+	startTimer(this: void, timeout: number): os.TimerID
 
-	/** Cancels a running timer, to prevent it throwing an event.
-	 * @noSelf */
-	cancelTimer(timerID: os.TimerID): void
+	/** Cancels a running timer, to prevent it throwing an event. */
+	cancelTimer(this: void, timerID: os.TimerID): void
 
-	/** Returns the current in-game time.
-	 * @noSelf */
-	time(): number
+	/** Returns the current in-game time. */
+	time(this: void): number
 
-	/** Makes the system wait a number of seconds before continuing in the program. os.sleep(time) may also be used as simply "sleep(time)".
-	 * @noSelf */
-	sleep(time: number): void
+	/** Makes the system wait a number of seconds before continuing in the program. os.sleep(time) may also be used as simply "sleep(time)". */
+	sleep(this: void, time: number): void
 
-	/** Return the current in-game day (the number of in-game days since the world was created).
-	 * @noSelf */
-	sleep(): number
+	/** Return the current in-game day (the number of in-game days since the world was created). */
+	sleep(this: void): number
 
-	/** Queues an event to be triggered at the specified in-game time.
-	 * @noSelf */
-	setAlarm(time: number): os.AlarmID
+	/** Queues an event to be triggered at the specified in-game time. */
+	setAlarm(this: void, time: number): os.AlarmID
 
-	/** Cancels a pending alarm, to prevent it throwing an event.
-	 * @noSelf */
-	cancelAlarm(alarmID: os.AlarmID): number
+	/** Cancels a pending alarm, to prevent it throwing an event. */
+	cancelAlarm(this: void, alarmID: os.AlarmID): number
 
-	/** Turns off the computer.
-	 * @noSelf */
-	shutdown(): never
+	/** Turns off the computer. */
+	shutdown(this: void): never
 
-	/** Reboots the computer.
-	 * @noSelf */
-	reboot(): never
+	/** Reboots the computer. */
+	reboot(this: void): never
 
 
-	/** Returns an about message with the version, license, and special thanks.
-	 * @noSelf */
-	about(): string
+	/** Returns an about message with the version, license, and special thanks. */
+	about(this: void): string
 }
 
 declare namespace paintutils {
@@ -1041,240 +915,194 @@ declare namespace paintutils {
 }
 
 declare const paintutils: {
-	/** Loads and returns an image object from path.
-	 * @noSelf */
-	loadImage(path: string): paintutils.Image
+	/** Loads and returns an image object from path. */
+	loadImage(this: void, path: string): paintutils.Image
 
-	/** Draws an image at (x, y) where image is an image object.
-	 * @noSelf */
-	drawImage(image: paintutils.Image, x: number, y: number): void
+	/** Draws an image at (x, y) where image is an image object. */
+	drawImage(this: void, image: paintutils.Image, x: number, y: number): void
 
-	/** Draws a pixel at (x, y) in the specified color.
-	 * @noSelf */
-	drawPixel(x: number, y: number, color?: number): void
+	/** Draws a pixel at (x, y) in the specified color. */
+	drawPixel(this: void, x: number, y: number, color?: number): void
 
-	/** Draws a line from (startX, startY) to (endX, endY) in the specified color.
-	 * @noSelf */
-	drawLine(startX: number, startY: number, endX: number, endY: number, color?: number): void
+	/** Draws a line from (startX, startY) to (endX, endY) in the specified color. */
+	drawLine(this: void, startX: number, startY: number, endX: number, endY: number, color?: number): void
 
-	/** Draws a box from (startX, startY) to (endX, endY) in the specified color.
-	 * @noSelf */
-	drawBox(startX: number, startY: number, endX: number, endY: number, color?: number): void
+	/** Draws a box from (startX, startY) to (endX, endY) in the specified color. */
+	drawBox(this: void, startX: number, startY: number, endX: number, endY: number, color?: number): void
 
-	/** Draws a filled box from (startX, startY) to (endX, endY) in the specified color.
-	 * @noSelf */
-	drawFilledBox(startX: number, startY: number, endX: number, endY: number, color?: number): void
+	/** Draws a filled box from (startX, startY) to (endX, endY) in the specified color. */
+	drawFilledBox(this: void, startX: number, startY: number, endX: number, endY: number, color?: number): void
 }
 
 declare const parallel: {
 	/** Runs all the functions at the same time, and stops when any of them returns.
 	 * Returns a number indicating which function has completed based on argument order
-	 * @noSelf @vararg */
-	waitForAny(...functions: ((...args: any) => void)[]): number
+	 * @vararg */
+	waitForAny(this: void, ...functions: ((...args: any) => void)[]): number
 
 	/** Runs all the functions at the same time, and stops when all of them have returned.
-	 * @noSelf @vararg */
-	waitForAll(...functions: ((...args: any) => void)[]): void
+	 * @vararg */
+	waitForAll(this: void, ...functions: ((...args: any) => void)[]): void
 }
 
 declare namespace peripheral {
 	type Peripherals = {
 		drive: {
-			/** Checks whether any item is in a disk drive.
-			 * @noSelf */
-			isPresent(): boolean
+			/** Checks whether any item is in a disk drive. */
+			isPresent(this: void): boolean
 
-			/** Checks whether a Floppy Disk is in a disk drive.
-			 * @noSelf */
-			hasData(): boolean
+			/** Checks whether a Floppy Disk is in a disk drive. */
+			hasData(this: void): boolean
 
-			/** Gets the directory name where the contents of the floppy disk can be accessed.
-			 * @noSelf */
-			getMountPath(): string | undefined
+			/** Gets the directory name where the contents of the floppy disk can be accessed. */
+			getMountPath(this: void): string | undefined
 
-			/** Sets the floppy disk's label.
-			 * @noSelf */
-			setLabel(label: string): void
+			/** Sets the floppy disk's label. */
+			setLabel(this: void, label: string): void
 
-			/** Gets the floppy disk's label.
-			 * @noSelf */
-			getLabel(): string | undefined
+			/** Gets the floppy disk's label. */
+			getLabel(this: void): string | undefined
 
-			/** Gets the floppy disk's unique ID number.
-			 * @noSelf */
-			getID(): disk.DiskID | undefined
+			/** Gets the floppy disk's unique ID number. */
+			getID(this: void): disk.DiskID | undefined
 
-			/** Checks whether a music disk is in the drive.
-			 * @noSelf */
-			hasAudio(): boolean
+			/** Checks whether a music disk is in the drive. */
+			hasAudio(this: void): boolean
 
-			/** Gets the title of the music disc in the drive.
-			 * @noSelf */
-			getAudioTitle(): string | undefined
+			/** Gets the title of the music disc in the drive. */
+			getAudioTitle(this: void): string | undefined
 
-			/** Starts playing the music disc in the drive.
-			 * @noSelf */
-			playAudio(): void
+			/** Starts playing the music disc in the drive. */
+			playAudio(this: void): void
 
-			/** Stops playing the music disc in the drive.
-			 * @noSelf */
-			playAudio(): void
+			/** Stops playing the music disc in the drive. */
+			playAudio(this: void): void
 
-			/** Ejects any item currently in the drive, spilling it into the world as a loose item.
-			 * @noSelf */
-			eject(): void
+			/** Ejects any item currently in the drive, spilling it into the world as a loose item. */
+			eject(this: void): void
 		},
 		modem: {
-			/** Checks to see if channel is open.
-			 * @noSelf */
-			isOpen(channel: number): boolean
+			/** Checks to see if channel is open. */
+			isOpen(this: void, channel: number): boolean
 
-			/** Opens channel to allow for listening. The channel specified must be larger than 0 and less than 65535.
-			 * @noSelf */
-			open(channel: number): void
+			/** Opens channel to allow for listening. The channel specified must be larger than 0 and less than 65535. */
+			open(this: void, channel: number): void
 
-			/** Closes an open channel to disallow listening.
-			 * @noSelf */
-			close(channel: number): void
+			/** Closes an open channel to disallow listening. */
+			close(this: void, channel: number): void
 
-			/** Closes all open channels.
-			 * @noSelf */
-			closeAll(): void
+			/** Closes all open channels. */
+			closeAll(this: void): void
 
-			/** Transmits a message on the specified channel.
-			 * @noSelf */
-			transmit(channel: number, replyChannel: number, message: any): void
+			/** Transmits a message on the specified channel. */
+			transmit(this: void, channel: number, replyChannel: number, message: any): void
 
-			/** Returns if the modem is wireless or wired.
-			 * @noSelf */
-			isWireless(): boolean
+			/** Returns if the modem is wireless or wired. */
+			isWireless(this: void): boolean
 
-			/** Returns a table containing the network names of the peripherals connected to the modem.
-			 * @noSelf */
-			getNamesRemote(): string[]
+			/** Returns a table containing the network names of the peripherals connected to the modem. */
+			getNamesRemote(this: void): string[]
 
-			/** Returns the type of a given peripheral connected to the modem.
-			 * @noSelf */
-			getTypeRemote(name: string): keyof Peripherals
+			/** Returns the type of a given peripheral connected to the modem. */
+			getTypeRemote(this: void, name: string): keyof Peripherals
 
-			/** Returns whether a given peripheral is actively connected to the modem.
-			 * @noSelf */
-			isPresentRemote(name: string): boolean
+			/** Returns whether a given peripheral is actively connected to the modem. */
+			isPresentRemote(this: void, name: string): boolean
 
-			/** Returns a list strings naming the functions available to the specified peripheral.
-			 * @noSelf */
-			getMethodsRemote(name: string): string[]
+			/** Returns a list strings naming the functions available to the specified peripheral. */
+			getMethodsRemote(this: void, name: string): string[]
 
 			/** Has the remote peripheral execute its specified function.
-			 * @noSelf @vararg @tupleReturn */
+			 * @vararg @tupleReturn */
 			callRemote<P extends keyof Peripherals, N extends keyof Peripherals[P]>(
+				this: void,
 				name: peripheral.Name,
 				method: N,
 				...args: any[]
 			): any[]
 		},
 		printer: {
-			/** Starts a new page. Returns true if page got started, false if not.
-			 * @noSelf */
-			newPage(): boolean
+			/** Starts a new page. Returns true if page got started, false if not. */
+			newPage(this: void): boolean
 
-			/** Ends the page and prints the page to the output tray. Returns true if page was ended, false if not.
-			 * @noSelf */
-			endPage(): boolean
+			/** Ends the page and prints the page to the output tray. Returns true if page was ended, false if not. */
+			endPage(this: void): boolean
 
-			/** Writes text to the paper, works the same way as term.write().
-			 * @noSelf */
-			write(text: string): void
+			/** Writes text to the paper, works the same way as term.write(). */
+			write(this: void, text: string): void
 
-			/** Sets the cursor position on the paper, works the same way as term.setCursorPos().
-			 * @noSelf */
-			setCursorPos(x: number, y: number): void
+			/** Sets the cursor position on the paper, works the same way as term.setCursorPos(). */
+			setCursorPos(this: void, x: number, y: number): void
 
 			/** Returns the coordinates of the cursor on the paper, works the same way as term.getCursorPos().
-			 * @noSelf @tupleReturn */
-			getCursorPos(): [number, number]
+			 * @tupleReturn */
+			getCursorPos(this: void,): [number, number]
 
 			/** Returns the size of the paper, works the same way as term.getSize().
-			 * @noSelf @tupleReturn */
-			getPageSize(): [number, number]
+			 * @tupleReturn */
+			getPageSize(this: void,): [number, number]
 
-			/** Sets the title of the page.
-			 * @noSelf */
-			setPageTitle(title: string): void
+			/** Sets the title of the page. */
+			setPageTitle(this: void, title: string): void
 
-			/** Returns the amount of paper available in the paper tray.
-			 * @noSelf */
-			getPaperLevel(): number
+			/** Returns the amount of paper available in the paper tray. */
+			getPaperLevel(this: void): number
 
-			/** Returns the amount of ink in the ink slot.
-			 * @noSelf */
-			getInkLevel(): number
+			/** Returns the amount of ink in the ink slot. */
+			getInkLevel(this: void): number
 		},
 		speaker: {
-			/** Plays a sound through the speaker.
-			 * @noSelf */
-			playSound(name: string, volume?: number, pitch?: number): void
+			/** Plays a sound through the speaker. */
+			playSound(this: void, name: string, volume?: number, pitch?: number): void
 
-			/** Plays a note block note through the speaker.
-			 * @noSelf */
-			playSound(name: string, volume?: number, pitch?: number): void
+			/** Plays a note block note through the speaker. */
+			playSound(this: void, name: string, volume?: number, pitch?: number): void
 		}
 		command: {
-			/** Get the command this command block will run.
-			 * @noSelf */
-			getCommand(): string
+			/** Get the command this command block will run. */
+			getCommand(this: void): string
 
-			/** Set the command block's command.
-			 * @noSelf */
-			setCommand(command: string): void
+			/** Set the command block's command. */
+			setCommand(this: void, command: string): void
 
 			/** Execute the command block once.
-			 * @noSelf @tupleReturn */
-			runCommand(): [true, undefined] | [false, string]
+			 * @tupleReturn */
+			runCommand(this: void,): [true, undefined] | [false, string]
 		}
 		computer: {
-			/** Turns on the Computer or Turtle.
-			 * @noSelf */
-			turnOn(): void
+			/** Turns on the Computer or Turtle. */
+			turnOn(this: void): void
 
-			/** Shuts off the Computer or Turtle.
-			 * @noSelf */
-			shutdown(): void
+			/** Shuts off the Computer or Turtle. */
+			shutdown(this: void): void
 
-			/** Reboots the Computer or Turtle.
-			 * @noSelf */
-			reboot(): void
+			/** Reboots the Computer or Turtle. */
+			reboot(this: void): void
 
-			/** Returns the ID of the Computer or Turtle.
-			 * @noSelf */
-			getID(): number
+			/** Returns the ID of the Computer or Turtle. */
+			getID(this: void): number
 
-			/** Returns the ON/OFF state of the Computer or Turtle.
-			 * @noSelf */
-			isOn(): boolean
+			/** Returns the ON/OFF state of the Computer or Turtle. */
+			isOn(this: void): boolean
 		},
 		monitor: Term & {
-			/** Sets the text scale.
-			 * @noSelf */
-			setTextScale(scale: number): void
+			/** Sets the text scale. */
+			setTextScale(this: void, scale: number): void
 		},
 		debugger: {
-			/** Stops the computer and opens the debugger prompt.
-			 * @noSelf */
-			stop(): void
+			/** Stops the computer and opens the debugger prompt. */
+			stop(this: void): void
 
 			/**
 			 * Sets a breakpoint in a file at a line number.
 			 * @param file The full file path to the script to stop on
 			 * @param line The line number to set the breakpoint at
 			 * @returns The ID of the new breakpoint
-			 * @noSelf
 			 */
-			setBreakpoint(file: string, line: number): number
+			setBreakpoint(this: void, file: string, line: number): number
 
-			/** Prints a value on the debugger's console window.
-			 * @noSelf */
-			print(value: any): void
+			/** Prints a value on the debugger's console window. */
+			print(this: void, value: any): void
 		}
 	}
 
@@ -1284,169 +1112,139 @@ declare namespace peripheral {
 }
 
 declare const peripheral: {
-	/** Returns true if a peripheral is connected on side.
-	 * @noSelf */
-	isPresent(side: peripheral.Name): boolean
+	/** Returns true if a peripheral is connected on side. */
+	isPresent(this: void, side: peripheral.Name): boolean
 
-	/** Returns the type of peripheral connected on side, as a string. If no peripheral is connected, returns nil.
-	 * @noSelf */
-	getType(side: peripheral.Name): keyof peripheral.Peripherals | undefined
+	/** Returns the type of peripheral connected on side, as a string. If no peripheral is connected, returns nil. */
+	getType(this: void, side: peripheral.Name): keyof peripheral.Peripherals | undefined
 
-	/** Returns a list of the names of all the methods of the peripheral connected on side. If no peripheral is connected, returns nil.
-	 * @noSelf */
-	getMethods(side: peripheral.Name): (keyof peripheral.Peripherals[keyof peripheral.Peripherals])[] | undefined
+	/** Returns a list of the names of all the methods of the peripheral connected on side. If no peripheral is connected, returns nil. */
+	getMethods(this: void, side: peripheral.Name): (keyof peripheral.Peripherals[keyof peripheral.Peripherals])[] | undefined
 
 	/** Calls a method on a peripheral. The arguments (apart from side and method) and the return values depend on the method being called. If no peripheral is connected, returns nil.
-	 * @noSelf @vararg @tupleReturn */
+	 * @vararg @tupleReturn */
 	call<P extends keyof peripheral.Peripherals, N extends keyof peripheral.Peripherals[P]>(
+		this: void,
 		side: peripheral.Name,
 		method: N,
 		...args: any[]
 	): any[]
 
-	/** Returns a table of functions, allowing you to call peripheral methods as if they were normal Lua functions. If no peripheral is connected, returns nil.
-	 * @noSelf */
-	wrap(side: peripheral.Name): peripheral.Peripherals[keyof peripheral.Peripherals] | undefined
+	/** Returns a table of functions, allowing you to call peripheral methods as if they were normal Lua functions. If no peripheral is connected, returns nil. */
+	wrap(this: void, side: peripheral.Name): peripheral.Peripherals[keyof peripheral.Peripherals] | undefined
 
-	/** Finds an attached peripheral of the given type and if found returns a table of functions, similar to peripheral.wrap, allowing you to call peripheral methods as if they were normal Lua functions. If no peripheral of the given type is connected, it returns nil.
-	 * @noSelf */
+	/** Finds an attached peripheral of the given type and if found returns a table of functions, similar to peripheral.wrap, allowing you to call peripheral methods as if they were normal Lua functions. If no peripheral of the given type is connected, it returns nil. */
 	find<K extends keyof peripheral.Peripherals>(
+		this: void,
 		type: K,
 		filter?: (side: peripheral.Name, peripheral: peripheral.Peripherals[K]) => boolean
 	): peripheral.Peripherals[K] | undefined
 
-	/** This function returns a table of all the sides that have a peripheral present. If the present peripheral is a wired modem any names of the peripherals that is on the network are also added to the table.
-	 * @noSelf */
-	getNames(): peripheral.Name[]
+	/** This function returns a table of all the sides that have a peripheral present. If the present peripheral is a wired modem any names of the peripherals that is on the network are also added to the table. */
+	getNames(this: void): peripheral.Name[]
 }
 
 declare const rednet: {
-	/** Tells the computer that the side can be used for networking.
-	 * @noSelf */
-	open(side: string): void
+	/** Tells the computer that the side can be used for networking. */
+	open(this: void, side: string): void
 
-	/** Tells the computer that the side can no longer be used for networking.
-	 * @noSelf */
-	close(side: string): void
+	/** Tells the computer that the side can no longer be used for networking. */
+	close(this: void, side: string): void
 
-	/** Sends a message "intended" for another system with a specific ID, using the currently opened sides. The receiverID is the ID number (note - not a string) of the computer you're sending the message to. The types that can be sent as the message vary depending on the version of ComputerCraft in use.
-	 * @noSelf */
-	send(receiverID: number, message: any, protocol?: string): void
+	/** Sends a message "intended" for another system with a specific ID, using the currently opened sides. The receiverID is the ID number (note - not a string) of the computer you're sending the message to. The types that can be sent as the message vary depending on the version of ComputerCraft in use. */
+	send(this: void, receiverID: number, message: any, protocol?: string): void
 
-	/** Sends the message to all connected and open computers.
-	 * @noSelf */
-	broadcast(message: any, protocol: string): void
+	/** Sends the message to all connected and open computers. */
+	broadcast(this: void, message: any, protocol: string): void
 
 	/** Waits until a rednet message of the specified protocol has been received, or until timeout seconds have passed.
-	 * @noSelf @tupleReturn */
-	receive(protocolFilter: string, timeout: number): [number, any, string]
+	 * @tupleReturn */
+	receive(this: void, protocolFilter: string, timeout: number): [number, any, string]
 	/** Waits until timeout seconds have passed. Will wait that many seconds for a message of any protocol.
-	 * @noSelf @tupleReturn */
-	receive(timeout: number): [number, any, string]
+	 * @tupleReturn */
+	receive(this: void, timeout: number): [number, any, string]
 	/** Waits for any message indefinitely.
-	 * @noSelf @tupleReturn */
-	receive(): [number, any, string]
+	 * @tupleReturn */
+	receive(this: void,): [number, any, string]
 
-	/** Returns true if the wireless modem is open.
-	 * @noSelf */
-	isOpen(side: string): boolean
+	/** Returns true if the wireless modem is open. */
+	isOpen(this: void, side: string): boolean
 
-	/** Registers hostname against protocol for the purposes of rednet.lookup().
-	 * @noSelf */
-	host(protocol: string, hostname: string): void
+	/** Registers hostname against protocol for the purposes of rednet.lookup(). */
+	host(this: void, protocol: string, hostname: string): void
 
-	/** Unregisters hostname from protocol.
-	 * @noSelf */
-	unhost(protocol: string, hostname: string): void
+	/** Unregisters hostname from protocol. */
+	unhost(this: void, protocol: string, hostname: string): void
 
 	/** Searches the local network for systems registered with a matching hostname and/or protocol, and returns matching IDs found.
-	 * @noSelf @tupleReturn */
-	lookup(protocol: string, hostname?: string): number[]
+	 * @tupleReturn */
+	lookup(this: void, protocol: string, hostname?: string): number[]
 
-	/** Internal use function - runs automatically and does not need to be called directly. Waits for modem_message events to appear within the event queue and generates corresponding rednet_message events for use with this API. Also responds to rednet.lookup() requests.
-	 * @noSelf */
-	run(): void
+	/** Internal use function - runs automatically and does not need to be called directly. Waits for modem_message events to appear within the event queue and generates corresponding rednet_message events for use with this API. Also responds to rednet.lookup() requests. */
+	run(this: void): void
 
 	CHANNEL_BROADCAST: number
 	CHANNEL_REPEAT: number
 }
 
 declare const redstone: {
-	/** Returns a table of possible sides.
-	 * @noSelf */
-	getSides(): Side[]
+	/** Returns a table of possible sides. */
+	getSides(this: void): Side[]
 
-	/** Returns the current redstone input signal state on side.
-	 * @noSelf */
-	getInput(side: Side): number
+	/** Returns the current redstone input signal state on side. */
+	getInput(this: void, side: Side): number
 
-	/** Sets or resets a redstone signal on side.
-	 * @noSelf */
-	setOutput(side: Side, value: boolean): void
+	/** Sets or resets a redstone signal on side. */
+	setOutput(this: void, side: Side, value: boolean): void
 
-	/** Returns the current redstone output signal on side.
-	 * @noSelf */
-	getOutput(side: Side): number
+	/** Returns the current redstone output signal on side. */
+	getOutput(this: void, side: Side): number
 
-	/** Returns the current redstone input signal strength on side. If no input is present, returns 0. If a redstone source (such as a redstone torch or block) is directly adjacent to the computer, returns 15.
-	 * @noSelf */
-	getAnalogInput(side: Side): number
+	/** Returns the current redstone input signal strength on side. If no input is present, returns 0. If a redstone source (such as a redstone torch or block) is directly adjacent to the computer, returns 15. */
+	getAnalogInput(this: void, side: Side): number
 
-	/** Sets or resets a redstone signal on side to strength (where strength is a positive integer).
-	 * @noSelf */
-	setAnalogOutput(side: Side, strength: number): void
+	/** Sets or resets a redstone signal on side to strength (where strength is a positive integer). */
+	setAnalogOutput(this: void, side: Side, strength: number): void
 
-	/** Returns the current redstone output signal strength on side.
-	 * @noSelf */
-	getAnalogOutput(side: Side): number
+	/** Returns the current redstone output signal strength on side. */
+	getAnalogOutput(this: void, side: Side): number
 
-	/** Returns the state (as a number) of a bundled cable connected to side.
-	 * @noSelf */
-	getBundledInput(side: Side): number
+	/** Returns the state (as a number) of a bundled cable connected to side. */
+	getBundledInput(this: void, side: Side): number
 
-	/** Returns the set of wires in a bundled cable which are being activated by the terminal on side.
-	 * @noSelf */
-	getBundledOutput(side: Side): number
+	/** Returns the set of wires in a bundled cable which are being activated by the terminal on side. */
+	getBundledOutput(this: void, side: Side): number
 
-	/** Sets one or multiple colored signals in a bundled cable attached to side. colors will determine which signals are activated. In order to set multiple signals, add the color values of the colors you want to activate. To turn off all of the colors, use 0.
-	 * @noSelf */
-	setBundledOutput(side: Side, colors: number): void
+	/** Sets one or multiple colored signals in a bundled cable attached to side. colors will determine which signals are activated. In order to set multiple signals, add the color values of the colors you want to activate. To turn off all of the colors, use 0. */
+	setBundledOutput(this: void, side: Side, colors: number): void
 
-	/** Returns true if color is active in a bundled cable attached to side. Else, returns false.
-	 * @noSelf */
-	testBundledInput(side: Side, color: number): boolean
+	/** Returns true if color is active in a bundled cable attached to side. Else, returns false. */
+	testBundledInput(this: void, side: Side, color: number): boolean
 }
 
 declare const rs: typeof redstone
 
 declare const settings: {
-	/** Sets the setting name to value.
-	 * @noSelf */
-	set(name: string, value: any): void
+	/** Sets the setting name to value. */
+	set(this: void, name: string, value: any): void
 
-	/** Returns the setting's name value, or default if the setting does not exist.
-	 * @noSelf */
-	get(name: string, def: any): any
+	/** Returns the setting's name value, or default if the setting does not exist. */
+	get(this: void, name: string, def: any): any
 
-	/** Removes the setting name.
-	 * @noSelf */
-	unset(name: string): void
+	/** Removes the setting name. */
+	unset(this: void, name: string): void
 
-	/** Removes all settings.
-	 * @noSelf */
-	clear(): void
+	/** Removes all settings. */
+	clear(this: void): void
 
-	/** Returns a numerically-indexed table of all the setting's names.
-	 * @noSelf */
-	getNames(): string[]
+	/** Returns a numerically-indexed table of all the setting's names. */
+	getNames(this: void): string[]
 
-	/** Loads settings from a file.
-	 * @noSelf */
-	load(path: string): boolean
+	/** Loads settings from a file. */
+	load(this: void, path: string): boolean
 
-	/** Saves current settings to a file.
-	 * @noSelf */
-	save(path: string): boolean
+	/** Saves current settings to a file. */
+	save(this: void, path: string): boolean
 }
 
 declare namespace shell {
@@ -1458,105 +1256,87 @@ declare namespace shell {
 }
 
 declare const shell: {
-	/** Exits the current shell.
-	 * @noSelf */
-	exit(): void
+	/** Exits the current shell. */
+	exit(this: void): void
 
-	/** Returns the path to the working directory.
-	 * @noSelf */
-	dir(): string
+	/** Returns the path to the working directory. */
+	dir(this: void): string
 
-	/** Sets the working directory.
-	 * @noSelf */
-	setDir(path: string): void
+	/** Sets the working directory. */
+	setDir(this: void, path: string): void
 
-	/** Returns the path.
-	 * @noSelf */
-	path(): string
+	/** Returns the path. */
+	path(this: void): string
 
-	/** Sets the path.
-	 * @noSelf */
-	setPath(path: string): void
+	/** Sets the path. */
+	setPath(this: void, path: string): void
 
-	/** Resolves a local path to an absolute path.
-	 * @noSelf */
-	resolve(localPath: string): string
+	/** Resolves a local path to an absolute path. */
+	resolve(this: void, localPath: string): string
 
-	/** Resolves the absolute path to the program whose name you provided.
-	 * @noSelf */
-	resolveProgram(name: string): string
+	/** Resolves the absolute path to the program whose name you provided. */
+	resolveProgram(this: void, name: string): string
 
-	/** Returns aliases.
-	 * @noSelf */
-	aliases(): Map<string, string>
+	/** Returns aliases. */
+	aliases(this: void): Map<string, string>
 
-	/** Sets an alias for program.
-	 * @noSelf */
-	setAlias(alias: string, program: string): void
+	/** Sets an alias for program. */
+	setAlias(this: void, alias: string, program: string): void
 
-	/** Clears an alias.
-	 * @noSelf */
-	clearAlias(alias: string): void
+	/** Clears an alias. */
+	clearAlias(this: void, alias: string): void
 
-	/** Returns a table of files in the current directory and in all paths in shell.path.
-	 * @noSelf */
-	programs(showHidden?: boolean): string[]
+	/** Returns a table of files in the current directory and in all paths in shell.path. */
+	programs(this: void, showHidden?: boolean): string[]
 
-	/** Returns the absolute path to the currently-executing program.
-	 * @noSelf */
-	getRunningProgram(): string
+	/** Returns the absolute path to the currently-executing program. */
+	getRunningProgram(this: void): string
 
 	/** Runs a command (program).
-	 * @noSelf @vararg */
-	run(command: string, ...args: string[]): boolean
+	 * @vararg */
+	run(this: void, command: string, ...args: string[]): boolean
 
 	/** Runs a program in another multishell tab. Requires an advanced system.
-	 * @noSelf @vararg */
-	openTab(command: string, ...args: string[]): multishell.TabID
+	 * @vararg */
+	openTab(this: void, command: string, ...args: string[]): multishell.TabID
 
-	/** Switches the multishell tab to tab with the given ID. Requires an advanced system.
-	 * @noSelf */
-	switchTab(tabID: multishell.TabID): void
+	/** Switches the multishell tab to tab with the given ID. Requires an advanced system. */
+	switchTab(this: void, tabID: multishell.TabID): void
 
-	/** Given a partial command line, returns a list of suffixes that could potentially be used to complete it.
-	 * @noSelf */
-	complete(prefix: string): string[]
+	/** Given a partial command line, returns a list of suffixes that could potentially be used to complete it. */
+	complete(this: void, prefix: string): string[]
 
-	/** Given a partial script / directory path, returns a list of suffixes that could potentially be used to complete it, including alias and path matches.
-	 * @noSelf */
-	completeProgram(prefix: string): string[]
+	/** Given a partial script / directory path, returns a list of suffixes that could potentially be used to complete it, including alias and path matches. */
+	completeProgram(this: void, prefix: string): string[]
 
-	/** Registers a function that determines how shell.complete() handles completion behavior for a given script.
-	 * @noSelf */
-	setCompletionFunction(path: string, completionFunction: shell.CompletionFunction): void
+	/** Registers a function that determines how shell.complete() handles completion behavior for a given script. */
+	setCompletionFunction(this: void, path: string, completionFunction: shell.CompletionFunction): void
 
-	/** Returns a pointer to the table containing functions registered by shell.setCompletionFunction() for use with shell.complete().
-	 * @noSelf */
-	getCompletionInfo(): shell.CompletionFunction[]
+	/** Returns a pointer to the table containing functions registered by shell.setCompletionFunction() for use with shell.complete(). */
+	getCompletionInfo(this: void): shell.CompletionFunction[]
 }
 
 declare const string: {
 	/**
 	 * Returns the internal numerical codes of the characters s[i], s[i+1], ..., s[j]. The default value for i is 1; the default value for j is i.
 	 * Note that numerical codes are not necessarily portable across platforms.
-	 * @noSelf @tupleReturn */
-	byte(s: string, i?: number, j?: number): string[]
+	 * @tupleReturn */
+	byte(this: void, s: string, i?: number, j?: number): string[]
 
 	/**
 	 * Receives zero or more integers. Returns a string with length equal to the number of arguments, in which each character has the internal numerical code equal to its corresponding argument.
 	 * Note that numerical codes are not necessarily portable across platforms.
-	 * @noSelf @vararg */
-	char(...bytes: number[]): string
+	 * @vararg */
+	char(this: void, ...bytes: number[]): string
 
-	/** Returns a string containing a binary representation of the given function, so that a later loadstring on this string returns a copy of the function. function must be a Lua function without upvalues.
-	 * @noSelf */
-	dump(f: (...args: any) => void): string
+	/** Returns a string containing a binary representation of the given function, so that a later loadstring on this string returns a copy of the function. function must be a Lua function without upvalues. */
+	dump(this: void, f: (...args: any) => void): string
 
 	/**
 	 * Looks for the first match of pattern in the string s. If it finds a match, then find returns the indices of s where this occurrence starts and ends; otherwise, it returns nil. A third, optional numerical argument init specifies where to start the search; its default value is 1 and can be negative. A value of true as a fourth, optional argument plain turns off the pattern matching facilities, so the function does a plain "find substring" operation, with no characters in pattern being considered "magic". Note that if plain is given, then init must be given as well.
 	 * If the pattern has captures, then in a successful match the captured values are also returned, after the two indices.
-	 * @noSelf @tupleReturn */
-	find(s: string, pattern: string, init: number, plain: boolean): [undefined] | [number, number, ...string[]]
+	 * @tupleReturn */
+	find(this: void, s: string, pattern: string, init: number, plain: boolean): [undefined] | [number, number, ...string[]]
 
 	/**
 	 * Returns a formatted version of its variable number of arguments following the description given in its first argument (which must be a string). The format string follows the same rules as the printf family of standard C functions. The only differences are that the options/modifiers *, l, L, n, p, and h are not supported and that there is an extra option, q. The q option formats a string in a form suitable to be safely read back by the Lua interpreter: the string is written between double quotes, and all double quotes, newlines, embedded zeros, and backslashes in the string are correctly escaped when written. For instance, the call
@@ -1570,8 +1350,8 @@ declare const string: {
 	 * ```
 	 * The options c, d, E, e, f, g, G, i, o, u, X, and x all expect a number as argument, whereas q and s expect a string.
 	 * This function does not accept string values containing embedded zeros, except as arguments to the q option.
-	 * @noSelf @vararg */
-	format(s: string, ...args: (number | string)[]): string
+	 * @vararg */
+	format(this: void, s: string, ...args: (number | string)[]): string
 
 	/**
 	 * Returns an iterator function that, each time it is called, returns the next captures from pattern over string s. If pattern specifies no captures, then the whole match is produced in each call.
@@ -1590,9 +1370,8 @@ declare const string: {
 	 *     t[k] = v
 	 * end
 	 * ```
-	 * For this function, a '^' at the start of a pattern does not work as an anchor, as this would prevent the iteration.
-	 * @noSelf */
-	gmatch(s: string, pattern: string): Iterator<string[]>
+	 * For this function, a '^' at the start of a pattern does not work as an anchor, as this would prevent the iteration. */
+	gmatch(this: void, s: string, pattern: string): Iterator<string[]>
 
 	/**
 	 * Returns a copy of s in which all (or the first n, if given) occurrences of the pattern have been replaced by a replacement string specified by repl, which can be a string, a table, or a function. gsub also returns, as its second value, the total number of matches that occurred.
@@ -1622,9 +1401,9 @@ declare const string: {
 	 * local t = {name="lua", version="5.1"}
 	 * x = string.gsub("$name-$version.tar.gz", "%$(%w+)", t)
 	 * --> x="lua-5.1.tar.gz"
-	 * ```
-	 * @noSelf */
+	 * ``` */
 	gsub(
+		this: void,
 		s: string,
 		pattern: string,
 		repl: string |
@@ -1633,60 +1412,49 @@ declare const string: {
 		n?: number
 	): string
 
-	/** Receives a string and returns its length. The empty string "" has length 0. Embedded zeros are counted, so "a\000bc\000" has length 5.
-	 * @noSelf */
-	len(s: string): number
+	/** Receives a string and returns its length. The empty string "" has length 0. Embedded zeros are counted, so "a\000bc\000" has length 5. */
+	len(this: void, s: string): number
 
-	/** Receives a string and returns a copy of this string with all uppercase letters changed to lowercase. All other characters are left unchanged. The definition of what an uppercase letter is depends on the current locale.
-	 * @noSelf */
-	lower(s: string): string
+	/** Receives a string and returns a copy of this string with all uppercase letters changed to lowercase. All other characters are left unchanged. The definition of what an uppercase letter is depends on the current locale. */
+	lower(this: void, s: string): string
 
 	/** Looks for the first match of pattern in the string s. If it finds one, then match returns the captures from the pattern; otherwise it returns nil. If pattern specifies no captures, then the whole match is returned. A third, optional numerical argument init specifies where to start the search; its default value is 1 and can be negative.
-	 * @noSelf @tupleReturn */
-	match(s: string, pattern: string, init: number): [undefined] | string[]
+	 * @tupleReturn */
+	match(this: void, s: string, pattern: string, init: number): [undefined] | string[]
 
-	/** Returns a string that is the concatenation of n copies of the string s.
-	 * @noSelf */
-	rep(s: string, n: number): string
+	/** Returns a string that is the concatenation of n copies of the string s. */
+	rep(this: void, s: string, n: number): string
 
-	/** Returns a string that is the string s reversed.
-	 * @noSelf */
-	reverse(s: string): string
+	/** Returns a string that is the string s reversed. */
+	reverse(this: void, s: string): string
 
-	/** Returns the substring of s that starts at i and continues until j; i and j can be negative. If j is absent, then it is assumed to be equal to -1 (which is the same as the string length). In particular, the call string.sub(s,1,j) returns a prefix of s with length j, and string.sub(s, -i) returns a suffix of s with length i.
-	 * @noSelf */
-	sub(s: string, i: number, j?: number): string
+	/** Returns the substring of s that starts at i and continues until j; i and j can be negative. If j is absent, then it is assumed to be equal to -1 (which is the same as the string length). In particular, the call string.sub(s,1,j) returns a prefix of s with length j, and string.sub(s, -i) returns a suffix of s with length i. */
+	sub(this: void, s: string, i: number, j?: number): string
 
-	/** Receives a string and returns a copy of this string with all lowercase letters changed to uppercase. All other characters are left unchanged. The definition of what a lowercase letter is depends on the current locale.
-	 * @noSelf */
-	upper(s: string): string
+	/** Receives a string and returns a copy of this string with all lowercase letters changed to uppercase. All other characters are left unchanged. The definition of what a lowercase letter is depends on the current locale. */
+	upper(this: void, s: string): string
 }
 
 declare const table: {
-	/** Given an array where all elements are strings or numbers, returns table[i]..sep..table[i+1] ··· sep..table[j]. The default value for sep is the empty string, the default for i is 1, and the default for j is the length of the table. If i is greater than j, returns the empty string.
-	 * @noSelf */
-	concat(table: any[], sep?: string, i?: number, j?: number): string
+	/** Given an array where all elements are strings or numbers, returns table[i]..sep..table[i+1] ··· sep..table[j]. The default value for sep is the empty string, the default for i is 1, and the default for j is the length of the table. If i is greater than j, returns the empty string. */
+	concat(this: void, table: any[], sep?: string, i?: number, j?: number): string
 
-	/** table.insert(t,x) inserts x at the end of table t.
-	 * @noSelf */
-	insert<T>(table: T[], value: T): void
-	/** Inserts element value at position pos in table, shifting up other elements to open space, if necessary.
-	 * @noSelf */
-	insert<T>(table: T[], pos: number, value: T): void
+	/** table.insert(t,x) inserts x at the end of table t. */
+	insert<T>(this: void, table: T[], value: T): void
+	/** Inserts element value at position pos in table, shifting up other elements to open space, if necessary. */
+	insert<T>(this: void, table: T[], pos: number, value: T): void
 
-	/** Returns the largest positive numerical index of the given table, or zero if the table has no positive numerical indices. (To do its job this function does a linear traversal of the whole table.)
-	 * @noSelf */
-	maxn(table: any[]): number
+	/** Returns the largest positive numerical index of the given table, or zero if the table has no positive numerical indices. (To do its job this function does a linear traversal of the whole table.) */
+	maxn(this: void, table: any[]): number
 
-	/** Removes from table the element at position pos, shifting down other elements to close the space, if necessary. Returns the value of the removed element. The default value for pos is n, where n is the length of the table, so that a call table.remove(t) removes the last element of table t.
-	 * @noSelf */
-	remove(table: any[], pos?: number): void
+	/** Removes from table the element at position pos, shifting down other elements to close the space, if necessary. Returns the value of the removed element. The default value for pos is n, where n is the length of the table, so that a call table.remove(t) removes the last element of table t. */
+	remove(this: void, table: any[], pos?: number): void
 
 	/**
 	 * Sorts table elements in a given order, in-place, from table[1] to table[n], where n is the length of the table. If comp is given, then it must be a function that receives two table elements, and returns true when the first is less than the second (so that not comp(a[i+1],a[i]) will be true after the sort). If comp is not given, then the standard Lua operator < is used instead.
 	 * The sort algorithm is not stable; that is, elements considered equal by the given order may have their relative positions changed by the sort.
-	 * @noSelf */
-	sort<T>(table: T[], comp?: (less: T, more: T) => boolean): void
+	 */
+	sort<T>(this: void, table: T[], comp?: (less: T, more: T) => boolean): void
 }
 
 declare const enum GraphicsMode {
@@ -1698,143 +1466,129 @@ declare const enum GraphicsMode {
 	Graphics256 = 2
 }
 
-/** @noSelf */
 declare interface Term {
 	/** Writes text to the screen, using the current text and background colors. */
-	write(text: string): void
+	write(this: void, text: string): void
 
 	/** Writes text to the screen using the specified text and background colors. */
-	blit(text: string, fg: string, bg: string): void
+	blit(this: void, text: string, fg: string, bg: string): void
 
 	/** Clears the entire screen. */
-	clear(): void
+	clear(this: void): void
 
 	/** Clears the line the cursor is on. */
-	clearLine(): void
+	clearLine(this: void): void
 
 	/** Returns two arguments containing the x and the y position of the cursor.
 	 * @tupleReturn */
-	getCursorPos(): [number, number]
+	getCursorPos(this: void): [number, number]
 
 	/** Sets the cursor's position. */
-	setCursorPos(x: number, y: number): void
+	setCursorPos(this: void, x: number, y: number): void
 
 	/** Disables the blinking or turns it on. */
-	setCursorBlink(blink: boolean): void
+	setCursorBlink(this: void, blink: boolean): void
 
 	/** Returns whether the terminal supports color. */
-	isColor(): boolean
+	isColor(this: void): boolean
 
 	/** Returns two arguments containing the x and the y values stating the size of the screen. (Good for if you're making something to be compatible with both Turtles and Computers.)
 	 * @tupleReturn */
-	getSize(): [number, number]
+	getSize(this: void): [number, number]
 
 	/** Scrolls the terminal n lines. */
-	scroll(n: number): void
+	scroll(this: void, n: number): void
 
 	/** Redirects terminal output to another terminal object (such as a window or wrapped monitor). Available only to the base term object. */
-	redirect(target: typeof term): typeof term
+	redirect(this: void, target: typeof term): typeof term
 
 	/** Sets the text color of the terminal. Limited functionality without an Advanced Computer / Turtle / Monitor. */
-	setTextColor(color: colors.Color): void
+	setTextColor(this: void, color: colors.Color): void
 
 	/** Returns the current text color of the terminal. */
-	getTextColor(): colors.Color
+	getTextColor(this: void): colors.Color
 
 	/** Sets the background color of the terminal. Limited functionality without an Advanced Computer / Turtle / Monitor. */
-	setBackgroundColor(color: colors.Color): void
+	setBackgroundColor(this: void, color: colors.Color): void
 
 	/** Returns the current background color of the terminal. */
-	getBackgroundColor(): colors.Color
+	getBackgroundColor(this: void): colors.Color
 
 	////////////////////////////////////////////////////////////////////////////
 
 	/** Sets whether the terminal is in pixel-graphics mode */
-	setGraphicsMode(mode: boolean | GraphicsMode): void
+	setGraphicsMode(this: void, mode: boolean | GraphicsMode): void
 
 	/** Returns the current graphics mode setting (false for text mode, number for graphics mode). */
-	getGraphicsMode(): false | GraphicsMode
+	getGraphicsMode(this: void): false | GraphicsMode
 
 	/** Sets a pixel at a location. */
-	setPixel(x: number, y: number, color: colors.Color): void
+	setPixel(this: void, x: number, y: number, color: colors.Color): void
 
 	/** Returns the color of a pixel at a location. */
-	getPixel(x: number, y: number): colors.Color
+	getPixel(this: void, x: number, y: number): colors.Color
 
 	/** Draws multiple pixels to the screen at once. */
-	drawPixels(startX: number, startY: number, pixels: (colors.Color[] | string)[]): void
+	drawPixels(this: void, startX: number, startY: number, pixels: (colors.Color[] | string)[]): void
 
 	/** Sets the RGB values for a color. (Override) */
-	setPaletteColor(color: colors.Color, hex: number): void
+	setPaletteColor(this: void, color: colors.Color, hex: number): void
 
 	/** Sets the RGB values for a color. (Override) */
-	setPaletteColor(color: colors.Color, r: number, g: number, b: number): void
+	setPaletteColor(this: void, color: colors.Color, r: number, g: number, b: number): void
 
 	/** Returns the RGB values for a color. (Override)
 	 * @tupleReturn */
-	getPaletteColor(color: colors.Color): [number, number, number]
+	getPaletteColor(this: void, color: colors.Color): [number, number, number]
 
 	/** Takes a screenshot. This function is rate-limited to prevent spam. */
-	screenshot(): void
+	screenshot(this: void): void
 
 	/** Toggles whether to show the mouse cursor over the window. */
-	showMouse(mouse: boolean): void
+	showMouse(this: void, mouse: boolean): void
 }
 
 declare const term: Term & {
-	/** Returns the current terminal object. Available only to the base term object.
-	 * @noSelf */
-	current(): Term
+	/** Returns the current terminal object. Available only to the base term object. */
+	current(this: void): Term
 
-	/** Returns the original terminal object. Available only to the base term object.
-	 * @noSelf */
-	native(): typeof term
+	/** Returns the original terminal object. Available only to the base term object. */
+	native(this: void): typeof term
 }
 
 declare const textutils: {
-	/** Writes string text at current cursor position, character-by-character. Number argument rate is optional and is defaulted to 20. The higher the value of rate, the faster text is written (passing a value of 1 writes one character per second).
-	 * @noSelf */
-	slowWrite(text: string, rate: number): void
+	/** Writes string text at current cursor position, character-by-character. Number argument rate is optional and is defaulted to 20. The higher the value of rate, the faster text is written (passing a value of 1 writes one character per second). */
+	slowWrite(this: void, text: string, rate: number): void
 
-	/** Prints string text at current cursor position, character-by-character. Number argument rate is optional and is defaulted to 20. The higher the value of rate, the faster text is printed (passing a value of 1 prints one character per second). This function also prints a newline.
-	 * @noSelf */
-	slowPrint(text: string, rate: number): void
+	/** Prints string text at current cursor position, character-by-character. Number argument rate is optional and is defaulted to 20. The higher the value of rate, the faster text is printed (passing a value of 1 prints one character per second). This function also prints a newline. */
+	slowPrint(this: void, text: string, rate: number): void
 
-	/** Takes input time and formats it in a more readable format. If the second value is true, returns time in twenty-four hour format; if the second value is false, returns time in twelve-hour format, with AM or PM. Default for twentyFourHour is false.
-	 * @noSelf */
-	formatTime(time: boolean, twentyFourHour: boolean): string
+	/** Takes input time and formats it in a more readable format. If the second value is true, returns time in twenty-four hour format; if the second value is false, returns time in twelve-hour format, with AM or PM. Default for twentyFourHour is false. */
+	formatTime(this: void, time: boolean, twentyFourHour: boolean): string
 
-	/** Prints tables in an ordered form. Each table is a row, the column width is auto-adjusted. If it encounters a number instead of a table then sets the text color to it.
-	 * @noSelf */
-	tabulate(...things: (colors.Color | string[])[]): void
+	/** Prints tables in an ordered form. Each table is a row, the column width is auto-adjusted. If it encounters a number instead of a table then sets the text color to it. */
+	tabulate(this: void, ...things: (colors.Color | string[])[]): void
 
-	/** Prints tables in an ordered form, like textutils.tabulate. However, it waits for confirmation before scrolling down.
-	 * @noSelf */
-	pagedTabulate(...things: (colors.Color | string[])[]): void
+	/** Prints tables in an ordered form, like textutils.tabulate. However, it waits for confirmation before scrolling down. */
+	pagedTabulate(this: void, ...things: (colors.Color | string[])[]): void
 
-	/** Prints string text onto the screen, but waits for confirmation (after at least freeLines have been scrolled) before scrolling down further. Default for freeLines is 0.
-	 * @noSelf */
-	pagedPrint(text: any, freeLines: number): number
+	/** Prints string text onto the screen, but waits for confirmation (after at least freeLines have been scrolled) before scrolling down further. Default for freeLines is 0. */
+	pagedPrint(this: void, text: any, freeLines: number): number
 
-	/** Returns a string representation of the data data for storage or transmission.
-	 * @noSelf */
-	serialize(data: any): string
+	/** Returns a string representation of the data data for storage or transmission. */
+	serialize(this: void, data: any): string
 
-	/** Returns the data reassembled from string serializedData. Used mainly together with textutils.serialize().
-	 * @noSelf */
-	unserialize(serializedData: string): any
+	/** Returns the data reassembled from string serializedData. Used mainly together with textutils.serialize(). */
+	unserialize(this: void, serializedData: string): any
 
-	/** Returns a JSON representation of the data data in a form of a string, mainly for command usage. Also exists as textutils.serialiseJSON.
-	 * @noSelf */
-	serializeJSON(data: any, unquoteKeys: boolean): string
+	/** Returns a JSON representation of the data data in a form of a string, mainly for command usage. Also exists as textutils.serialiseJSON. */
+	serializeJSON(this: void, data: any, unquoteKeys: boolean): string
 
-	/** Makes a string safe to encode into a url. Spaces are replaced with +s. Unsafe characters such as '\', '£' and '}' are translated into ASCII code and preceded with a % for transmission. For reference visit: [1].
-	 * @noSelf */
-	urlEncode(urlUnsafeString: string): string
+	/** Makes a string safe to encode into a url. Spaces are replaced with +s. Unsafe characters such as '\', '£' and '}' are translated into ASCII code and preceded with a % for transmission. For reference visit: [1]. */
+	urlEncode(this: void, urlUnsafeString: string): string
 
-	/** Returns a list of strings that could be combined with the provided name to produce valid entries in the specified environment.
-	 * @noSelf */
-	complete(prefix: string, environment: Map<string, any>): string[]
+	/** Returns a list of strings that could be combined with the provided name to produce valid entries in the specified environment. */
+	complete(this: void, prefix: string, environment: Map<string, any>): string[]
 }
 
 /** @customConstructor vector.new */
@@ -1872,33 +1626,36 @@ declare class Vector {
 
 	/** Returns a string representation of the vector in the form of "x,y,z". */
 	tostring(): string
+
+	// CC:TWEAKED //////////////////////////////////////////////////////////////
+
+	/** Negate a vector */
+	unm(): Vector
 }
 
-/** @noSelf */
 declare interface Window extends Term {
 	/** Determines whether subsequent renders to the window will be visible. */
-	setVisible(visibility: boolean): void
+	setVisible(this: void, visibility: boolean): void
 
 	/** Redraws the contents of the window. */
-	redraw(): void
+	redraw(this: void): void
 
 	/** Returns the cursor back to its position / state within the window. */
-	restoreCursor(): void
+	restoreCursor(this: void): void
 
 	/** Returns the top left co-ordinate of the window. */
-	getPosition(): [number, number]
+	getPosition(this: void): [number, number]
 
 	/** Moves and resizes the window. */
-	reposition(x: number, y: number, w: number, h: number): void
+	reposition(this: void, x: number, y: number, w: number, h: number): void
 
 	/** Moves the window. */
-	reposition(x: number, y: number): void
+	reposition(this: void, x: number, y: number): void
 }
 
 declare const window: {
-	/** Creates and returns a new window object, similar to a wrapped monitor. Refer to the term API for a list of functions attached to it.
-	 * @noSelf */
-	create(parent: Term, x: number, y: number, w: number, h: number, visible?: boolean): Window
+	/** Creates and returns a new window object, similar to a wrapped monitor. Refer to the term API for a list of functions attached to it. */
+	create(this: void, parent: Term, x: number, y: number, w: number, h: number, visible?: boolean): Window
 }
 
 declare const enum ConfigType {
@@ -1909,54 +1666,42 @@ declare const enum ConfigType {
 }
 
 declare const config: {
-	/** Returns the value of a configuration variable.
-	 * @noSelf */
-	get(name: string): any
+	/** Returns the value of a configuration variable. */
+	get(this: void, name: string): any
 
-	/** Sets the value of a configuration variable.
-	 * @noSelf */
-	set(name: string, value: any): void
+	/** Sets the value of a configuration variable. */
+	set(this: void, name: string, value: any): void
 
-	/** Returns a list of all configuration variable names.
-	 * @noSelf */
-	list(): string[]
+	/** Returns a list of all configuration variable names. */
+	list(this: void): string[]
 
-	/** Returns the type of a variable. 0 for boolean, 1 for string, 2 for number, 3 for table
-	 * @noSelf */
-	getType(name: string): ConfigType
+	/** Returns the type of a variable. 0 for boolean, 1 for string, 2 for number, 3 for table */
+	getType(this: void, name: string): ConfigType
 }
 
 declare const mounter: {
-	/** Mounts a real directory to a ComputerCraft directory. Returns whether the mount operation succeeded.
-	 * @noSelf */
-	mount(externalPath: string, localPath: string, readOnly?: boolean): boolean
+	/** Mounts a real directory to a ComputerCraft directory. Returns whether the mount operation succeeded. */
+	mount(this: void, externalPath: string, localPath: string, readOnly?: boolean): boolean
 
-	/** Unmounts a previously mounted local directory.
-	 * @noSelf */
-	unmount(localPath: string): boolean
+	/** Unmounts a previously mounted local directory. */
+	unmount(this: void, localPath: string): boolean
 
-	/** Returns a key-value table of all current mounts on the system. Each value is a list of directories in a multi-mount (if not using multi-mounts, then only one value is in that list).
-	 * @noSelf */
-	list(): string[]
+	/** Returns a key-value table of all current mounts on the system. Each value is a list of directories in a multi-mount (if not using multi-mounts, then only one value is in that list). */
+	list(this: void): string[]
 
-	/** Returns whether a mount was mounted read-only.
-	 * @noSelf */
-	isReadOnly(localPath: string): boolean
+	/** Returns whether a mount was mounted read-only. */
+	isReadOnly(this: void, localPath: string): boolean
 }
 
 declare const periphemu: {
-	/** Creates a new printer that prints to the specified path.
-	 * @noSelf */
-	create(side: peripheral.Name, type: 'printer', path: string): boolean
-	/** Creates a new peripheral.
-	 * @noSelf */
-	create(side: peripheral.Name, type: keyof peripheral.Peripherals): boolean
+	/** Creates a new printer that prints to the specified path. */
+	create(this: void, side: peripheral.Name, type: 'printer', path: string): boolean
+	/** Creates a new peripheral. */
+	create(this: void, side: peripheral.Name, type: keyof peripheral.Peripherals): boolean
 
-	/** Removes a peripheral.
-	 * @noSelf */
-	remove(side: peripheral.Name): boolean
+	/** Removes a peripheral. */
+	remove(this: void, side: peripheral.Name): boolean
 
-	/** Returns a list of available peripheral types.
-	 * @noSelf */
-	names(): string[]
+	/** Returns a list of available peripheral types. */
+	names(this: void): string[]
 }

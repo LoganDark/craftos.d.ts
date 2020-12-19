@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "esnext",
+		"lib": ["esnext"],
+		"sourceMap": true,
+		"strict": true
+	},
+	"exclude": [
+		"node_modules"
+	],
+	"tstl": {
+		"luaTarget": "5.1",
+		"noHeader": true,
+		"luaLibImport": "require"
+	}
+}

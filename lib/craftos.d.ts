@@ -551,10 +551,6 @@ declare const io: {
 	 * @noSelf @vararg @tupleReturn */
 	read(format?: '*l'): [string] | [undefined, string]
 
-	/** Returns a handle for a temporary file. This file is opened in update mode and it is automatically removed when the program ends.
-	 * @noSelf @tupleReturn */
-	tmpfile(): [io.file] | [undefined, string]
-
 	/** Checks whether obj is a valid file handle. Returns the string "file" if obj is an open file handle, "closed file" if obj is a closed file handle, or nil if obj is not a file handle.
 	 * @noSelf */
 	type(obj: any): 'file' | 'closed file' | undefined
@@ -1317,6 +1313,9 @@ declare const rednet: {
 	/** Internal use function - runs automatically and does not need to be called directly. Waits for modem_message events to appear within the event queue and generates corresponding rednet_message events for use with this API. Also responds to rednet.lookup() requests.
 	 * @noSelf */
 	run(): void
+
+	CHANNEL_BROADCAST: number
+	CHANNEL_REPEAT: number
 }
 
 declare const redstone: {
@@ -1364,6 +1363,8 @@ declare const redstone: {
 	 * @noSelf */
 	testBundledInput(side: Side, color: number): boolean
 }
+
+declare const rs: typeof redstone
 
 declare const settings: {
 	/** Sets the setting name to value.

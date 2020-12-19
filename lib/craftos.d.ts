@@ -20,6 +20,96 @@
  * SOFTWARE.
  */
 
+declare const _HOST: string
+declare const _VERSION: 'Lua 5.1'
+
+// LUA 5.1 /////////////////////////////////////////////////////////////////////
+
+/** Issues an error when the value of its argument v is false (i.e., nil or false); otherwise, returns all its arguments. message is an error message; when absent, it defaults to "assertion failed!" */
+declare function assert(this: void, condition: undefined | false, message?: string): never
+/** Issues an error when the value of its argument v is false (i.e., nil or false); otherwise, returns all its arguments. message is an error message; when absent, it defaults to "assertion failed!" */
+declare function assert<T>(this: void, condition: T, message?: string): T
+
+/** Opens the named file and executes its contents as a Lua chunk. When called without arguments, dofile executes the contents of the standard input (stdin). Returns all values returned by the chunk. In case of errors, dofile propagates the error to its caller (that is, dofile does not run in protected mode). */
+declare function dofile(this: void, filename?: string): any
+
+/**
+ * Terminates the last protected function called and returns message as the error message. Function error never returns.
+ * Usually, error adds some information about the error position at the beginning of the message. The level argument specifies how to get the error position. With level 1 (the default), the error position is where the error function was called. Level 2 points the error to where the function that called error was called; and so on. Passing a level 0 avoids the addition of error position information to the message.
+ */
+declare function error(this: void, message: string, level?: number): never
+
+/** Returns the current environment in use by the function. f is a Lua function. */
+declare function getfenv(this: void, f: (...args: any) => any): object
+/** Returns the current environment in use by the function. f is a number that specifies the function at that stack level: Level 1 is the function calling getfenv. If f is 0, getfenv returns the global environment. The default for f is 1. */
+declare function getfenv(this: void, l?: number): object
+
+/**
+ * Sets the environment to be used by the given function. f can be a Lua function that specifies the function. setfenv returns the given function.
+ * As a special case, when f is 0 setfenv changes the environment of the running thread. In this case, setfenv returns no values.
+ */
+declare function setfenv(this: void, f: (...args: any) => any, table: object): typeof f
+/**
+ * Sets the environment to be used by the given function. f can be a number that specifies the function at that stack level: Level 1 is the function calling setfenv. setfenv returns the given function.
+ * As a special case, when f is 0 setfenv changes the environment of the running thread. In this case, setfenv returns no values.
+ */
+declare function setfenv(this: void, l: number, table: object): (...args: any) => any
+
+/** If object does not have a metatable, returns nil. Otherwise, if the object's metatable has a "__metatable" field, returns the associated value. Otherwise, returns the metatable of the given object. */
+declare function getmetatable(this: void, object: any): any
+
+/**
+ * Sets the metatable for the given table. (You cannot change the metatable of other types from Lua, only from C.) If metatable is nil, removes the metatable of the given table. If the original metatable has a "__metatable" field, raises an error.
+ * This function returns table.
+ */
+declare function setmetatable(this: void, table: any, metatable: object | undefined): typeof table
+
+/**
+ * Loads a chunk using function func to get its pieces. Each call to func must return a string that concatenates with previous results. A return of an empty string, nil, or no value signals the end of the chunk.
+ * If there are no errors, returns the compiled chunk as a function; otherwise, returns nil plus the error message. The environment of the returned function is the global environment.
+ * chunkname is used as the chunk name for error messages and debug information. When absent, it defaults to "=(load)".
+ * @tupleReturn */
+declare function load(this: void, func: (this: void) => string, chunkname?: string): [(...args: any) => any] | [undefined, string]
+
+/** Similar to load, but gets the chunk from file filename or from the standard input, if no file name is given.
+ * @tupleReturn */
+declare function loadfile(this: void, filename?: string): [(...args: any) => any] | [undefined, string]
+
+/**
+ * Similar to load, but gets the chunk from the given string.
+ * To load and run a given string, use the idiom
+ * ```
+ * assert(loadstring(s))()
+ * ```
+ * When absent, chunkname defaults to the given string.
+ * @tupleReturn */
+declare function loadstring(this: void, string: string, chunkname?: string): [(...args: any) => any] | [undefined, string]
+
+///** Calls function f with the given arguments in protected mode. This means that any error inside f is not propagated; instead, pcall catches the error and returns a status code. Its first result is the status code (a boolean), which is true if the call succeeds without errors. In such case, pcall also returns all results from the call, after this first result. In case of any error, pcall returns false plus the error message.
+// * @tupleReturn */
+//declare function pcall<F extends (...args: any) => any>(this: void, f: F, ...args: Parameters<F>): [true, ReturnType<F>] | [false, string]
+
+/** Receives any number of arguments, and prints their values to stdout, using the tostring function to convert them to strings. print is not intended for formatted output, but only as a quick way to show a value, typically for debugging. For formatted output, use string.format. */
+declare function print(this: void, ...args: any): void
+
+/** Checks whether v1 is equal to v2, without invoking any metamethod. Returns a boolean. */
+declare function rawequal<A, B>(this: void, v1: A, v2: B): boolean
+
+/** Gets the real value of table[index], without invoking any metamethod. table must be a table; index may be any value. */
+declare function rawget<T extends object, K extends keyof T>(this: void, table: T, index: K): T[K]
+
+/**
+ * Sets the real value of table[index] to value, without invoking any metamethod. table must be a table, index any value different from nil, and value any Lua value.
+ * This function returns table.
+ */
+declare function rawset<T extends object, K extends keyof T>(this: void, table: T, index: K, value: T[K]): T
+
+/** If index is a number, returns all arguments after argument number index. Otherwise, index must be the string "#", and select returns the total number of extra arguments it received.
+ * @tupleReturn */
+declare function select(this: void, index: '#' | number, ...args: any[]): any[]
+
+// GLOBAL MODULES //////////////////////////////////////////////////////////////
+
 declare const bit: {
 	/** Shifts a number left by a specified number of bits. */
 	blshift(this: void, n: number, bits: number): number
@@ -831,6 +921,10 @@ declare namespace os {
 		/** Fired when the inventory on a Turtle is changed. */
 		turtle_inventory: []
 
+		// CC:TWEAKED //////////////////////////////////////////////////////////
+
+		// TODO
+
 		// CRAFTOS-PC //////////////////////////////////////////////////////////
 
 		/** Sent when an HTTP request is made. */
@@ -938,11 +1032,11 @@ declare const parallel: {
 	/** Runs all the functions at the same time, and stops when any of them returns.
 	 * Returns a number indicating which function has completed based on argument order
 	 * @vararg */
-	waitForAny(this: void, ...functions: ((...args: any) => void)[]): number
+	waitForAny(this: void, ...functions: ((...args: any) => any)[]): number
 
 	/** Runs all the functions at the same time, and stops when all of them have returned.
 	 * @vararg */
-	waitForAll(this: void, ...functions: ((...args: any) => void)[]): void
+	waitForAll(this: void, ...functions: ((...args: any) => any)[]): void
 }
 
 declare namespace peripheral {
@@ -1330,7 +1424,7 @@ declare const string: {
 	char(this: void, ...bytes: number[]): string
 
 	/** Returns a string containing a binary representation of the given function, so that a later loadstring on this string returns a copy of the function. function must be a Lua function without upvalues. */
-	dump(this: void, f: (...args: any) => void): string
+	dump(this: void, f: (...args: any) => any): string
 
 	/**
 	 * Looks for the first match of pattern in the string s. If it finds a match, then find returns the indices of s where this occurrence starts and ends; otherwise, it returns nil. A third, optional numerical argument init specifies where to start the search; its default value is 1 and can be negative. A value of true as a fourth, optional argument plain turns off the pattern matching facilities, so the function does a plain "find substring" operation, with no characters in pattern being considered "magic". Note that if plain is given, then init must be given as well.

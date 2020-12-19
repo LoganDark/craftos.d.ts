@@ -3,9 +3,9 @@
 [ ]     _CC_DISABLE_LUA51_FEATURES = false,
 [ ]     _ENV = table: 0x7fef87430a80,
 [ ]     _G = table: 0x7fef87430a80,
-[ ]     _HOST = "ComputerCraft 1.93.1 (CraftOS-PC v2.4.5)",
-[ ]     _VERSION = "Lua 5.1",
-[ ]     assert = function: 0x7fef87431de0,
+[X]     _HOST = "ComputerCraft 1.93.1 (CraftOS-PC v2.4.5)",
+[X]     _VERSION = "Lua 5.1",
+[x]     assert = function: 0x7fef87431de0,
 [x]     bit = {
 [x]         band = function: 0x7fef87433650,
 [x]         blogic_rshift = function: 0x7fef87433970,
@@ -80,8 +80,8 @@
 [x]         setLabel = function: 0x7fef877312c0,
 [x]         stopAudio = function: 0x7fef877315b0
         },
-[ ]     dofile = function: 0x7fef8760fae0,
-[ ]     error = function: 0x7fef87431f30,
+[x]     dofile = function: 0x7fef8760fae0,
+[x]     error = function: 0x7fef87431f30,
 [-]     fs = {
 [x]         attributes = function: 0x7fef87434460,
 [x]         combine = function: 0x7fef87433fc0,
@@ -105,8 +105,8 @@
 [x]         open = function: 0x7fef87434380
         },
 [ ]     gcinfo = function: 0x7fef87430ac0,
-[ ]     getfenv = function: 0x7fef874320c0,
-[ ]     getmetatable = function: 0x7fef87432110,
+[x]     getfenv = function: 0x7fef874320c0,
+[x]     getmetatable = function: 0x7fef87432110,
 [x]     help = {
 [x]         completeTopic = function: 0x7fef877322a0,
 [x]         lookup = function: 0x7fef877334a0,
@@ -290,9 +290,9 @@
 [x]         z = 44,
 [x]         zero = 11
         },
-[ ]     load = function: 0x7fef8772bce0,
-[ ]     loadfile = function: 0x7fef8760fd20,
-[ ]     loadstring = function: 0x7fef876065b0,
+[x]     load = function: 0x7fef8772bce0,
+[x]     loadfile = function: 0x7fef8760fd20,
+[x]     loadstring = function: 0x7fef876065b0,
 [-]     math = {
 [x]         abs = function: 0x7fef87721e20,
 [x]         acos = function: 0x7fef87721e70,
@@ -374,7 +374,7 @@
 [x]         waitForAll = function: 0x7fef8760c3c0,
 [x]         waitForAny = function: 0x7fef8760c1b0
         },
-[ ]     pcall = function: 0x7fef87432080,
+[-]     pcall = function: 0x7fef87432080,
 [x]     periphemu = {
 [x]         create = function: 0x7fef87434d80,
 [x]         names = function: 0x7fef87434db0,
@@ -392,11 +392,11 @@
 [ ]         remove = function: 0x7fef875221f0,
 [x]         wrap = function: 0x7fef87523c70
         },
-[ ]     print = function: 0x7fef876103a0,
+[x]     print = function: 0x7fef876103a0,
 [ ]     printError = function: 0x7fef876101a0,
-[ ]     rawequal = function: 0x7fef874324c0,
-[ ]     rawget = function: 0x7fef87432520,
-[ ]     rawset = function: 0x7fef87432570,
+[x]     rawequal = function: 0x7fef874324c0,
+[x]     rawget = function: 0x7fef87432520,
+[x]     rawset = function: 0x7fef87432570,
 [ ]     read = function: 0x7fef8760ff60,
 [x]     rednet = {
 [x]         CHANNEL_BROADCAST = 65535,
@@ -438,9 +438,9 @@
 [x]         setOutput = function: 0x7fef87435010,
 [x]         testBundledInput = function: 0x7fef87435230
         },
-[ ]     select = function: 0x7fef874321d0,
-[ ]     setfenv = function: 0x7fef87432220,
-[ ]     setmetatable = function: 0x7fef87432270,
+[x]     select = function: 0x7fef874321d0,
+[x]     setfenv = function: 0x7fef87432220,
+[x]     setmetatable = function: 0x7fef87432270,
 [-]     settings = {
 [x]         clear = function: 0x7fef8773b020,
 [ ]         define = function: 0x7fef8773aac0,

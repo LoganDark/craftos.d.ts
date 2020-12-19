@@ -66,7 +66,7 @@
 [x]         wrap = function: 0x7fef874328d0,
 [x]         yield = function: 0x7fef87432920
         },
-[-]     disk = {
+[x]     disk = {
 [x]         eject = function: 0x7fef877315e0,
 [x]         getAudioTitle = function: 0x7fef87731720,
 [x]         getID = function: 0x7fef87731610,
@@ -74,7 +74,7 @@
 [x]         getMountPath = function: 0x7fef877311d0,
 [x]         hasAudio = function: 0x7fef877316f0,
 [x]         hasData = function: 0x7fef87731580,
-[ ]         insertDisk = function: 0x7fef87731640,
+[x]         insertDisk = function: 0x7fef87731640,
 [x]         isPresent = function: 0x7fef87730d70,
 [x]         playAudio = function: 0x7fef87731750,
 [x]         setLabel = function: 0x7fef877312c0,

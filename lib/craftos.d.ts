@@ -226,6 +226,8 @@ declare const disk: {
 	 * @noSelf */
 	eject(side: peripheral.Name): void
 
+	// CRAFTOS-PC //////////////////////////////////////////////////////////////
+
 	/**
 	 * Replaces the loaded disk with the specified resource.
 	 * @param path Either a disk ID or path to load.
@@ -276,6 +278,15 @@ declare namespace fs {
 	interface FileWriteBinary extends File {
 		/** Writes a single byte into the file */
 		write(byte: number): void
+	}
+
+	// CC:TWEAKED //////////////////////////////////////////////////////////////
+
+	interface Attributes {
+		size: number
+		isDir: boolean
+		created: number
+		modified: number
 	}
 }
 
@@ -364,6 +375,20 @@ declare const fs: {
 		includeFiles?: boolean,
 		includeSlashes?: boolean
 	): string[]
+
+	// CC:TWEAKED //////////////////////////////////////////////////////////////
+
+	/** Returns true if a path is mounted to the parent filesystem.
+	 * @noSelf */
+	isDriveRoot(path: string): boolean
+
+	/** Returns this drive's capacity. This will be nil for "read-only" drives, such as the ROM or treasure disks.
+	 * @noSelf */
+	getCapacity(path: string): boolean
+
+	/** Get attributes about a specific file or folder.
+	 * @noSelf */
+	attributes(path: string): fs.Attributes
 }
 
 /** @noSelf */
@@ -915,6 +940,8 @@ declare namespace os {
 		/** Fired when the inventory on a Turtle is changed. */
 		turtle_inventory: []
 
+		// CRAFTOS-PC //////////////////////////////////////////////////////////
+
 		/** Sent when an HTTP request is made. */
 		http_request: [number, http.CpcRequest, http.CpcResponse]
 		/** Send this inside an http.listen() callback to stop the server */
@@ -1184,7 +1211,26 @@ declare namespace peripheral {
 			getInkLevel(): number
 		},
 		speaker: {
-			// TODO
+			/** Plays a sound through the speaker.
+			 * @noSelf */
+			playSound(name: string, volume?: number, pitch?: number): void
+
+			/** Plays a note block note through the speaker.
+			 * @noSelf */
+			playSound(name: string, volume?: number, pitch?: number): void
+		}
+		command: {
+			/** Get the command this command block will run.
+			 * @noSelf */
+			getCommand(): string
+
+			/** Set the command block's command.
+			 * @noSelf */
+			setCommand(command: string): void
+
+			/** Execute the command block once.
+			 * @noSelf @tupleReturn */
+			runCommand(): [true, undefined] | [false, string]
 		}
 		computer: {
 			/** Turns on the Computer or Turtle.

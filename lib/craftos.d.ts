@@ -1591,9 +1591,6 @@ declare interface Term {
 	/** Scrolls the terminal n lines. */
 	scroll(this: void, n: number): void
 
-	/** Redirects terminal output to another terminal object (such as a window or wrapped monitor). Available only to the base term object. */
-	redirect(this: void, target: typeof term): typeof term
-
 	/** Sets the text color of the terminal. Limited functionality without an Advanced Computer / Turtle / Monitor. */
 	setTextColor(this: void, color: colors.Color): void
 
@@ -1641,6 +1638,9 @@ declare interface Term {
 }
 
 declare const term: Term & {
+	/** Redirects terminal output to another terminal object (such as a window or wrapped monitor). Available only to the base term object. */
+	redirect(this: void, target: Term): typeof term
+
 	/** Returns the current terminal object. Available only to the base term object. */
 	current(this: void): Term
 

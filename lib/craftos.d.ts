@@ -380,8 +380,7 @@ declare const fs: {
 	/** Copies a file or directory to a new location. */
 	copy(this: void, fromPath: string, toPath: string): void
 
-	/** Deletes a file or directory.
-	 * @luaName delete */
+	/** Deletes a file or directory. */
 	'delete'(this: void, path: string): void
 
 	/** Combines two path components, returning a path consisting of the local path nested inside the base path. */
@@ -727,8 +726,7 @@ declare const keys: {
 	down: keys.KeyCode
 	pageDown: keys.KeyCode
 	insert: keys.KeyCode
-	/** @luaName delete */
-	_delete: keys.KeyCode
+	'delete': keys.KeyCode
 }
 
 declare const math: {

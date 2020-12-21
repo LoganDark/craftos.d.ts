@@ -1512,7 +1512,7 @@ declare const string: {
 		pattern: string,
 		repl: string |
 			{[key: string]: string} |
-			((...matches: string[]) => string),
+			((this: void, ...matches: string[]) => string),
 		n?: number
 	): string
 

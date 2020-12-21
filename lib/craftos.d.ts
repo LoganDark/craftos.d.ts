@@ -1647,6 +1647,12 @@ declare interface Term {
 
 	/** Toggles whether to show the mouse cursor over the window. */
 	showMouse(this: void, mouse: boolean): void
+
+	// CRAFTOS-PC //////////////////////////////////////////////////////////////
+
+	/** Returns parts of the native color palette
+	 * @tupleReturn */
+	nativePaletteColor(this: void, color: colors.Color): [number, number, number]
 }
 
 declare const term: Term & {

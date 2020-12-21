@@ -1425,7 +1425,7 @@ declare const string: {
 	 * Returns the internal numerical codes of the characters s[i], s[i+1], ..., s[j]. The default value for i is 1; the default value for j is i.
 	 * Note that numerical codes are not necessarily portable across platforms.
 	 * @tupleReturn */
-	byte(this: void, s: string, i?: number, j?: number): string[]
+	byte(this: void, s: string, i?: number, j?: number): number[]
 
 	/**
 	 * Receives zero or more integers. Returns a string with length equal to the number of arguments, in which each character has the internal numerical code equal to its corresponding argument.

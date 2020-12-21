@@ -108,6 +108,18 @@ declare function rawset<T extends object, K extends keyof T>(this: void, table: 
  * @tupleReturn */
 declare function select(this: void, index: '#' | number, ...args: any[]): any[]
 
+/**
+ * Tries to convert its argument to a number. If the argument is already a number or a string convertible to a number, then tonumber returns this number; otherwise, it returns nil.
+ * An optional argument specifies the base to interpret the numeral. The base may be any integer between 2 and 36, inclusive. In bases above 10, the letter 'A' (in either upper or lower case) represents 10, 'B' represents 11, and so forth, with 'Z' representing 35. In base 10 (the default), the number can have a decimal part, as well as an optional exponent part (see §2.1). In other bases, only unsigned integers are accepted.
+ */
+declare function tonumber(this: void, value: string, base?: number): number | undefined
+
+/**
+ * Receives an argument of any type and converts it to a string in a reasonable format. For complete control of how numbers are converted, use string.format.
+ * If the metatable of e has a "__tostring" field, then tostring calls the corresponding value with e as argument, and uses the result of the call as its result.
+ */
+declare function tostring(this: void, value: any): string
+
 // GLOBAL MODULES //////////////////////////////////////////////////////////////
 
 declare const bit: {

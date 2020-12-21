@@ -533,8 +533,8 @@
 [ ]         unserializeJSON = function: 0x7fef87743160,
 [ ]         urlEncode = function: 0x7fef877432b0
         },
-[ ]     tonumber = function: 0x7fef874322d0,
-[ ]     tostring = function: 0x7fef87432330,
+[x]     tonumber = function: 0x7fef874322d0,
+[x]     tostring = function: 0x7fef87432330,
 [ ]     type = function: 0x7fef87432390,
 [ ]     unpack = function: 0x7fef874323e0,
 [ ]     utf8 = {

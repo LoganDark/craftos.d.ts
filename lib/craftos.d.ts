@@ -239,11 +239,11 @@ declare namespace coroutine {
 
 declare const coroutine: {
 	/** Creates a new coroutine. */
-	create(f: Function): coroutine
+	create(this: void, f: Function): coroutine
 
 	/** Starts or resumes a coroutine.
 	 * @vararg @tupleReturn */
-	resume(this: void, coro: coroutine, ...values: any[]): any[]
+	resume(this: void, coro: coroutine, ...values: any[]): [true, ...any[]] | [false, string]
 
 	/** Returns the currently executing coroutine. */
 	running(this: void): coroutine

@@ -1632,6 +1632,12 @@ declare interface Term {
 	/** Draws multiple pixels to the screen at once. */
 	drawPixels(this: void, startX: number, startY: number, pixels: (colors.Color[] | string)[]): void
 
+	/** Returns the colors of every pixel in a region. Off-screen pixels will be `nil`. Only available in CraftOS-PC version 2.5 and later */
+	getPixels(this: void, x: number, y: number, w: number, h: number): colors.Color[][]
+
+	/** Fills a region of the screen with a solid color. Only available in CraftOS-PC version 2.5 and later */
+	fillPixels(this: void, x: number, y: number, w: number, h: number, color: colors.Color): void
+
 	/** Sets the RGB values for a color. (Override) */
 	setPaletteColor(this: void, color: colors.Color, hex: number): void
 

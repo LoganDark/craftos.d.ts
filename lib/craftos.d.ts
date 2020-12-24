@@ -969,11 +969,11 @@ declare const os: {
 
 	/** Blocks until the computer receives an event, or if target-event is specified, will block until an instance of target-event occurs. os.pullEvent(target-event) returns the event and any parameters the event may have. If a target-event is specified, the computer will not break for any other events (except termination).
 	 * @tupleReturn */
-	pullEvent<K extends keyof os.Events>(this: void, filter: K): os.Events[K]
+	pullEvent<K extends keyof os.Events>(this: void, filter?: K): [K, ...os.Events[K]]
 
 	/** Advanced version of pullEvent(). Blocks until the computer receives an event, or if target-event is specified, will block until an instance of target-event occurs. os.pullEventRaw(target-event) returns the event and any parameters the event may have. Unlike os.pullEvent(target-event), this function will not raise an error if a 'terminate' event is received.
 	 * @tupleReturn */
-	pullEventRaw<K extends keyof os.Events>(this: void, filter: K): os.Events[K]
+	pullEventRaw<K extends keyof os.Events>(this: void, filter?: K): [K, ...os.Events[K]]
 
 	/** Adds an event to the event queue with the name event and the given parameters.
 	 * @vararg */

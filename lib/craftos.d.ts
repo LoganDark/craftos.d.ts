@@ -1147,7 +1147,7 @@ declare namespace peripheral {
 			endPage(this: void): boolean
 
 			/** Writes text to the paper, works the same way as term.write(). */
-			write(this: void, text: string): void
+			write(this: void, arg: any): void
 
 			/** Sets the cursor position on the paper, works the same way as term.setCursorPos(). */
 			setCursorPos(this: void, x: number, y: number): void
@@ -1586,7 +1586,7 @@ declare const enum GraphicsMode {
 
 declare interface Term {
 	/** Writes text to the screen, using the current text and background colors. */
-	write(this: void, text: string): void
+	write(this: void, arg: any): void
 
 	/** Writes text to the screen using the specified text and background colors. */
 	blit(this: void, text: string, fg: string, bg: string): void
@@ -1645,8 +1645,10 @@ declare interface Term {
 
 	/** Draws multiple pixels to the screen at once. */
 	drawPixels(this: void, startX: number, startY: number, pixels: (colors.Color[] | string)[]): void
+
 	/** Draws multiple pixels to the screen at once. */
 	drawPixels(this: void, startX: number, startY: number, pixels: (colors.Color[] | string)[], width: number, height: number): void
+
 	/** Draws multiple pixels to the screen at once. */
 	drawPixels(this: void, startX: number, startY: number, fill: colors.Color, width: number, height: number): void
 

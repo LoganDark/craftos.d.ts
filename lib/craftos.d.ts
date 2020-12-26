@@ -1676,9 +1676,8 @@ declare interface Term {
 
 	// CC:TWEAKED //////////////////////////////////////////////////////////////
 
-	/** Returns parts of the native color palette
-	 * @tupleReturn */
-	nativePaletteColor(this: void, color: colors.Color): [number, number, number]
+	/** Checks if the cursor is currently blinking. */
+	getCursorBlink(this: void): boolean
 }
 
 declare const term: Term & {
@@ -1690,6 +1689,12 @@ declare const term: Term & {
 
 	/** Returns the original terminal object. Available only to the base term object. */
 	native(this: void): typeof term
+
+	// CC:TWEAKED //////////////////////////////////////////////////////////////
+
+	/** Returns parts of the native color palette
+	 * @tupleReturn */
+	nativePaletteColor(this: void, color: colors.Color): [number, number, number]
 }
 
 declare const textutils: {

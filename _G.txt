@@ -1,5 +1,5 @@
 [-] {
-[ ]     _CC_DEFAULT_SETTINGS = "",
+[x]     _CC_DEFAULT_SETTINGS = "",
 [ ]     _CC_DISABLE_LUA51_FEATURES = false,
 [ ]     _ENV = table: 0x7fef87430a80,
 [ ]     _G = table: 0x7fef87430a80,
@@ -393,7 +393,7 @@
 [x]         wrap = function: 0x7fef87523c70
         },
 [x]     print = function: 0x7fef876103a0,
-[ ]     printError = function: 0x7fef876101a0,
+[x]     printError = function: 0x7fef876101a0,
 [x]     rawequal = function: 0x7fef874324c0,
 [x]     rawget = function: 0x7fef87432520,
 [x]     rawset = function: 0x7fef87432570,
@@ -453,7 +453,7 @@
 [ ]         undefine = function: 0x7fef8773acc0,
 [x]         unset = function: 0x7fef8773afe0
         },
-[ ]     sleep = function: 0x7fef87610830,
+[x]     sleep = function: 0x7fef87610830,
 [-]     string = {
 [x]         byte = function: 0x7fef87721790,
 [x]         char = function: 0x7fef877217e0,

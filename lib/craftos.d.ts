@@ -120,6 +120,20 @@ declare function tonumber(this: void, value: string, base?: number): number | un
  */
 declare function tostring(this: void, value: any): string
 
+/** Writes characters to the terminal screen. Applies word-wrap, unlike term.write(). */
+declare function write(this: void, arg: any): void
+
+// CC:TWEAKED //////////////////////////////////////////////////////////////////
+
+/** The ComputerCraft and Minecraft version of the current computer environment. */
+declare const _CC_DEFAULT_SETTINGS: string
+
+/** Pauses execution for the specified number of seconds. */
+declare function sleep(this: void, time: number): void
+
+/** Prints the specified values to the screen in red, separated by spaces, wrapping if necessary. */
+declare function printError(this: void, ...args: any): void
+
 // GLOBAL MODULES //////////////////////////////////////////////////////////////
 
 declare const bit: {
@@ -1658,7 +1672,7 @@ declare interface Term {
 	/** Toggles whether to show the mouse cursor over the window. */
 	showMouse(this: void, mouse: boolean): void
 
-	// CRAFTOS-PC //////////////////////////////////////////////////////////////
+	// CC:TWEAKED //////////////////////////////////////////////////////////////
 
 	/** Returns parts of the native color palette
 	 * @tupleReturn */

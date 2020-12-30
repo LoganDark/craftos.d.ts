@@ -1655,9 +1655,6 @@ declare interface Term {
 	/** Returns the colors of every pixel in a region. Off-screen pixels will be `nil`. Only available in CraftOS-PC version 2.5 and later */
 	getPixels(this: void, x: number, y: number, w: number, h: number): colors.Color[][]
 
-	/** Sets whether pixel functions should draw to an off-screen buffer. Only available in CraftOS-PC version 2.5 and later */
-	bufferPixels(this: void, buffer: boolean): void
-
 	/** Sets the RGB values for a color. (Override) */
 	setPaletteColor(this: void, color: colors.Color, hex: number): void
 

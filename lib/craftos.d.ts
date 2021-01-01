@@ -1629,7 +1629,7 @@ declare interface Term {
 	/** Returns the current background color of the terminal. */
 	getBackgroundColor(this: void): colors.Color
 
-	////////////////////////////////////////////////////////////////////////////
+	// CRAFTOS-PC ///////////////////////////////////////////////////////////////
 
 	/** Sets whether the terminal is in pixel-graphics mode */
 	setGraphicsMode(this: void, mode: boolean | GraphicsMode): void
@@ -1653,7 +1653,7 @@ declare interface Term {
 	drawPixels(this: void, startX: number, startY: number, fill: colors.Color, width: number, height: number): void
 
 	/** Returns the colors of every pixel in a region. Off-screen pixels will be `nil`. Only available in CraftOS-PC version 2.5 and later */
-	getPixels(this: void, x: number, y: number, w: number, h: number): colors.Color[][]
+	getPixels(this: void, x: number, y: number, w: number, h: number, strings?: boolean): colors.Color[][]
 
 	/** Sets the RGB values for a color. (Override) */
 	setPaletteColor(this: void, color: colors.Color, hex: number): void
@@ -1670,6 +1670,12 @@ declare interface Term {
 
 	/** Toggles whether to show the mouse cursor over the window. */
 	showMouse(this: void, mouse: boolean): void
+
+	/** Sets whether the terminal is currently frozen. */
+	setFrozen(this: void, frozen: boolean): void
+
+	/** Gets whether the terminal is currently frozen. */
+	getFrozen(this: void): boolean
 
 	// CC:TWEAKED //////////////////////////////////////////////////////////////
 

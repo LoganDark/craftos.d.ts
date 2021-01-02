@@ -374,7 +374,7 @@
 [x]         waitForAll = function: 0x7fef8760c3c0,
 [x]         waitForAny = function: 0x7fef8760c1b0
         },
-[-]     pcall = function: 0x7fef87432080,
+[x]     pcall = function: 0x7fef87432080,
 [x]     periphemu = {
 [x]         create = function: 0x7fef87434d80,
 [x]         names = function: 0x7fef87434db0,

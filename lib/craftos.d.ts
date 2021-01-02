@@ -85,7 +85,7 @@ declare function loadstring(this: void, string: string, chunkname?: string): Mul
 type ToArray<T> = T extends MultiReturn<infer A> ? A : [T]
 
 /** Calls function f with the given arguments in protected mode. This means that any error inside f is not propagated; instead, pcall catches the error and returns a status code. Its first result is the status code (a boolean), which is true if the call succeeds without errors. In such case, pcall also returns all results from the call, after this first result. In case of any error, pcall returns false plus the error message. */
-declare function pcall<F extends (...args: any) => any>(this: void, f: F, ...args: Parameters<F>): [true, ...ToArray<ReturnType<F>>] | [false, string]
+declare function pcall<F extends (...args: any) => any>(this: void, f: F, ...args: Parameters<F>): MultiReturn<[true, ...ToArray<ReturnType<F>>]> | MultiReturn<[false, string]>
 
 /** Receives any number of arguments, and prints their values to stdout, using the tostring function to convert them to strings. print is not intended for formatted output, but only as a quick way to show a value, typically for debugging. For formatted output, use string.format. */
 declare function print(this: void, ...args: any): void

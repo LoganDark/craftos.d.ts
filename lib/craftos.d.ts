@@ -67,13 +67,11 @@ declare function setmetatable(this: void, table: any, metatable: object | undefi
 /**
  * Loads a chunk using function func to get its pieces. Each call to func must return a string that concatenates with previous results. A return of an empty string, nil, or no value signals the end of the chunk.
  * If there are no errors, returns the compiled chunk as a function; otherwise, returns nil plus the error message. The environment of the returned function is the global environment.
- * chunkname is used as the chunk name for error messages and debug information. When absent, it defaults to "=(load)".
- * @tupleReturn */
-declare function load(this: void, func: (this: void) => string, chunkname?: string): [(...args: any) => any] | [undefined, string]
+ * chunkname is used as the chunk name for error messages and debug information. When absent, it defaults to "=(load)". */
+declare function load(this: void, func: (this: void) => string, chunkname?: string): MultiReturn<[(...args: any) => any]> | MultiReturn<[undefined, string]>
 
-/** Similar to load, but gets the chunk from file filename or from the standard input, if no file name is given.
- * @tupleReturn */
-declare function loadfile(this: void, filename?: string): [(...args: any) => any] | [undefined, string]
+/** Similar to load, but gets the chunk from file filename or from the standard input, if no file name is given. */
+declare function loadfile(this: void, filename?: string): MultiReturn<[(...args: any) => any]> | MultiReturn<[undefined, string]>
 
 /**
  * Similar to load, but gets the chunk from the given string.
@@ -81,9 +79,8 @@ declare function loadfile(this: void, filename?: string): [(...args: any) => any
  * ```
  * assert(loadstring(s))()
  * ```
- * When absent, chunkname defaults to the given string.
- * @tupleReturn */
-declare function loadstring(this: void, string: string, chunkname?: string): [(...args: any) => any] | [undefined, string]
+ * When absent, chunkname defaults to the given string. */
+declare function loadstring(this: void, string: string, chunkname?: string): MultiReturn<[(...args: any) => any]> | MultiReturn<[undefined, string]>
 
 ///** Calls function f with the given arguments in protected mode. This means that any error inside f is not propagated; instead, pcall catches the error and returns a status code. Its first result is the status code (a boolean), which is true if the call succeeds without errors. In such case, pcall also returns all results from the call, after this first result. In case of any error, pcall returns false plus the error message.
 // * @tupleReturn */
@@ -104,9 +101,8 @@ declare function rawget<T extends object, K extends keyof T>(this: void, table: 
  */
 declare function rawset<T extends object, K extends keyof T>(this: void, table: T, index: K, value: T[K]): T
 
-/** If index is a number, returns all arguments after argument number index. Otherwise, index must be the string "#", and select returns the total number of extra arguments it received.
- * @tupleReturn */
-declare function select(this: void, index: '#' | number, ...args: any[]): any[]
+/** If index is a number, returns all arguments after argument number index. Otherwise, index must be the string "#", and select returns the total number of extra arguments it received. */
+declare function select(this: void, index: '#' | number, ...args: any[]): MultiReturn<any[]>
 
 /**
  * Tries to convert its argument to a number. If the argument is already a number or a string convertible to a number, then tonumber returns this number; otherwise, it returns nil.
@@ -179,9 +175,8 @@ declare const colors: {
 	/** Combine a three-color RGB value into one hexadecimal representation. */
 	packRGB(this: void, r: number, g: number, b: number): number
 
-	/** Separate a hexadecimal RGB color into its three constituent channels.
-	 * @tupleReturn */
-	unpackRGB(this: void, rgb: number): [number, number, number]
+	/** Separate a hexadecimal RGB color into its three constituent channels. */
+	unpackRGB(this: void, rgb: number): MultiReturn<[number, number, number]>
 
 	white: colors.Color
 	orange: colors.Color
@@ -218,9 +213,8 @@ declare namespace command {
 }
 
 declare const command: {
-	/** Executes the specified command, yields until the result is determined, then returns it.
-	 * @tupleReturn */
-	exec(this: void, command: string): [boolean, string[]]
+	/** Executes the specified command, yields until the result is determined, then returns it. */
+	exec(this: void, command: string): MultiReturn<[boolean, string[]]>
 
 	/** Executes the specified command, but doesn't yield. Queues a "task_complete" event after the command is executed. */
 	execAsync(this: void, command: string): command.TaskID
@@ -228,9 +222,8 @@ declare const command: {
 	/** Returns a numerically indexed table filled with strings representing acceptable commands for commands.exec() / commands.execAsync(). */
 	list(this: void): string[]
 
-	/** Returns the Minecraft world coordinates of the computer running the command.
-	 * @tupleReturn */
-	getBlockPosition(this: void): [number, number, number]
+	/** Returns the Minecraft world coordinates of the computer running the command. */
+	getBlockPosition(this: void): MultiReturn<[number, number, number]>
 
 	/** Returns the Minecraft world coordinates of the computer running the command. */
 	getBlockInfo(this: void, x: number, y: number, z: number): command.BlockInfo
@@ -247,8 +240,7 @@ type coroutine = {readonly '': unique symbol}
 declare namespace coroutine {
 	type Status = 'running' | 'suspended' | 'normal' | 'dead'
 
-	/** @tupleReturn */
-	type Resumer<T extends (...args: any) => any> = (...args: Parameters<T>) => any[]
+	type Resumer<T extends (...args: any) => any> = (...args: Parameters<T>) => MultiReturn<any[]>
 }
 
 declare const coroutine: {
@@ -256,8 +248,8 @@ declare const coroutine: {
 	create(this: void, f: Function): coroutine
 
 	/** Starts or resumes a coroutine.
-	 * @vararg @tupleReturn */
-	resume(this: void, coro: coroutine, ...values: any[]): [true, ...any[]] | [false, string]
+	 * @vararg */
+	resume(this: void, coro: coroutine, ...values: any[]): MultiReturn<[true, ...any[]]> | MultiReturn<[false, string]>
 
 	/** Returns the currently executing coroutine. */
 	running(this: void): coroutine
@@ -269,8 +261,8 @@ declare const coroutine: {
 	wrap<T extends (...args: any) => any>(this: void, f: T): coroutine.Resumer<T>
 
 	/** Pauses the currently executing coroutine and passes control to its caller.
-	 * @vararg @tupleReturn */
-	yield(this: void, ...args: any): any[]
+	 * @vararg */
+	yield(this: void, ...args: any): MultiReturn<any[]>
 }
 
 declare type Side = 'front' | 'back' | 'left' | 'right' | 'top' | 'bottom'
@@ -452,9 +444,8 @@ declare const fs: {
 }
 
 declare const gps: {
-	/** Tries to retrieve the computer or turtles own location. On success, returns the location of the turtle’s modem. On failure (if no responses are received for timeout seconds, by default 2), returns nil. If debug is true, debug messages are printed.
-	 * @tupleReturn */
-	locate(this: void, timeout: number, debug?: boolean): [number, number, number] | [undefined]
+	/** Tries to retrieve the computer or turtles own location. On success, returns the location of the turtle’s modem. On failure (if no responses are received for timeout seconds, by default 2), returns nil. If debug is true, debug messages are printed. */
+	locate(this: void, timeout: number, debug?: boolean): MultiReturn<[number, number, number]> | MultiReturn<[undefined]>
 }
 
 declare const help: {
@@ -510,9 +501,8 @@ declare const http: {
 	/** Sends a HTTP POST request to a website, synchronously. */
 	post(this: void, url: string, postData?: string, headers?: Map<string, string>): http.Response
 
-	/** Checks if a URL is valid and is included in the HTTP whitelist.
-	 * @tupleReturn */
-	checkURL(this: void, url: string): [true] | [false, string]
+	/** Checks if a URL is valid and is included in the HTTP whitelist. */
+	checkURL(this: void, url: string): MultiReturn<[true]> | MultiReturn<[false, string]>
 
 	////////////////////////////////////////////////////////////////////////////
 
@@ -528,13 +518,11 @@ declare const http: {
 
 declare namespace io {
 	interface file {
-		/** Closes file. Note that files are automatically closed when their handles are garbage collected, but that takes an unpredictable amount of time to happen.
-		 * @tupleReturn */
-		close(): [any] | [undefined, string]
+		/** Closes file. Note that files are automatically closed when their handles are garbage collected, but that takes an unpredictable amount of time to happen. */
+		close(): MultiReturn<[any]> | MultiReturn<[undefined, string]>
 
-		/** Saves any written data to file.
-		 * @tupleReturn */
-		flush(): [any] | [undefined, string]
+		/** Saves any written data to file. */
+		flush(): MultiReturn<[any]> | MultiReturn<[undefined, string]>
 
 		/**
 		 * Returns an iterator function that, each time it is called, returns a new line from the file. Therefore, the construction
@@ -542,31 +530,28 @@ declare namespace io {
 		 * for line in file:lines() do body end
 		 * ```
 		 * will iterate over all lines of the file. (Unlike io.lines, this function does not close the file when the loop ends.)
-		 * @tupleReturn */
-		lines(): [Iterator<string>] | [undefined, string]
+		 */
+		lines(): MultiReturn<[Iterator<string>]> | MultiReturn<[undefined, string]>
 
 		/**
 		 * Reads the file file, according to the given formats, which specify what to read. For each format, the function returns a string (or a number) with the characters read, or nil if it cannot read data with the specified format. When called without formats, it uses a default format that reads the entire next line (see below).
 		 * The available formats are
 		 * - "*l": reads the next line (skipping the end of line), returning nil on end of file. This is the default format.
 		 *
-		 * @vararg @tupleReturn */
-		read(format?: '*l'): [string] | [undefined, string]
+		 * @vararg */
+		read(format?: '*l'): MultiReturn<[string]> | MultiReturn<[undefined, string]>
 
-		/** Writes the value of its argument to the file. The argument must be a string or number. To write other values, use tostring or string.format before write.
-		 * @tupleReturn */
-		write(value: string | number): [any] | [undefined, string]
+		/** Writes the value of its argument to the file. The argument must be a string or number. To write other values, use tostring or string.format before write. */
+		write(value: string | number): MultiReturn<[any]> | MultiReturn<[undefined, string]>
 	}
 }
 
 declare const io: {
-	/** Equivalent to file:close(). Without a file, closes the default output file.
-	 * @tupleReturn */
-	close(this: void, file?: io.file): [any] | [undefined, string]
+	/** Equivalent to file:close(). Without a file, closes the default output file. */
+	close(this: void, file?: io.file): MultiReturn<[any]> | MultiReturn<[undefined, string]>
 
-	/** Equivalent to file:flush over the default output file.
-	 * @tupleReturn */
-	flush(this: void,): [any] | [undefined, string]
+	/** Equivalent to file:flush over the default output file. */
+	flush(this: void,): MultiReturn<[any]> | MultiReturn<[undefined, string]>
 
 	/**
 	 * Opens the named file (in text mode), and sets its handle as the default input file.
@@ -590,8 +575,8 @@ declare const io: {
 	 * ```
 	 * will iterate over all lines of the file. When the iterator function detects the end of file, it returns nil (to finish the loop) and automatically closes the file.
 	 * The call io.lines() (with no file name) is equivalent to io.input():lines(); that is, it iterates over the lines of the default input file. In this case it does not close the file when the loop ends.
-	 * @tupleReturn */
-	lines(this: void, filename?: string): [Iterator<string>] | [undefined, string]
+	 */
+	lines(this: void, filename?: string): MultiReturn<[Iterator<string>]> | MultiReturn<[undefined, string]>
 
 	/**
 	 * This function opens a file, in the mode specified in the string mode. It returns a new file handle, or, in case of errors, nil plus an error message.
@@ -601,13 +586,13 @@ declare const io: {
 	 * - "a": append mode;
 	 *
 	 * The mode string can also have a 'b' at the end, which is needed in some systems to open the file in binary mode. This string is exactly what is used in the standard C function fopen.
-	 * @tupleReturn */
+	 */
 	open(
 		this: void,
 		filename: string,
 		mode?: 'r' | 'w' | 'a' |
 			'rb' | 'wb' | 'ab'
-	): [io.file] | [undefined, string]
+	): MultiReturn<[io.file]> | MultiReturn<[undefined, string]>
 
 	/** Similar to io.input, but operates over the default output file. */
 	output(this: void, filename: string): void
@@ -619,15 +604,14 @@ declare const io: {
 	output(this: void): io.file
 
 	/** Equivalent to io.input():read.
-	 * @vararg @tupleReturn */
-	read(this: void, format?: '*l'): [string] | [undefined, string]
+	 * @vararg */
+	read(this: void, format?: '*l'): MultiReturn<[string]> | MultiReturn<[undefined, string]>
 
 	/** Checks whether obj is a valid file handle. Returns the string "file" if obj is an open file handle, "closed file" if obj is a closed file handle, or nil if obj is not a file handle. */
 	type(this: void, obj: any): 'file' | 'closed file' | undefined
 
-	/** Equivalent to io.output():write.
-	 * @tupleReturn */
-	write(this: void, value: string | number): [any] | [undefined, string]
+	/** Equivalent to io.output():write. */
+	write(this: void, value: string | number): MultiReturn<[any]> | MultiReturn<[undefined, string]>
 }
 
 declare namespace keys {
@@ -815,9 +799,8 @@ declare const math: {
 	 * @vararg */
 	min(this: void, ...numbers: number[]): number
 
-	/** Returns two numbers, the integral part of x and the fractional part of x.
-	 * @tupleReturn */
-	modf(this: void, x: number): [number, number]
+	/** Returns two numbers, the integral part of x and the fractional part of x. */
+	modf(this: void, x: number): MultiReturn<[number, number]>
 
 	/** The value of pi. */
 	pi: number
@@ -830,7 +813,8 @@ declare const math: {
 
 	/**
 	 * This function is an interface to the simple pseudo-random generator function rand provided by ANSI C. (No guarantees can be given for its statistical properties.)
-	 * When called without arguments, returns a uniform pseudo-random real number in the range [0,1). When called with an integer number m, math.random returns a uniform pseudo-random integer in the range [1, m]. When called with two integer numbers m and n, function random returns a uniform pseudo-random integer in the range [m, n]. */
+	 * When called without arguments, returns a uniform pseudo-random real number in the range [0,1). When called with an integer number m, math.random returns a uniform pseudo-random integer in the range [1, m]. When called with two integer numbers m and n, function random returns a uniform pseudo-random integer in the range [m, n].
+	 */
 	random(this: void, m?: number, n?: number): number
 
 	/** Sets x as the "seed" for the pseudo-random generator: equal seeds produce equal sequences of numbers. */
@@ -981,13 +965,11 @@ declare const os: {
 	/** Unloads a previously loaded API. */
 	unloadAPI(this: void, name: string): void
 
-	/** Blocks until the computer receives an event, or if target-event is specified, will block until an instance of target-event occurs. os.pullEvent(target-event) returns the event and any parameters the event may have. If a target-event is specified, the computer will not break for any other events (except termination).
-	 * @tupleReturn */
-	pullEvent<K extends keyof os.Events>(this: void, filter?: K): [K, ...os.Events[K]]
+	/** Blocks until the computer receives an event, or if target-event is specified, will block until an instance of target-event occurs. os.pullEvent(target-event) returns the event and any parameters the event may have. If a target-event is specified, the computer will not break for any other events (except termination). */
+	pullEvent<K extends keyof os.Events>(this: void, filter?: K): MultiReturn<[K, ...os.Events[K]]>
 
-	/** Advanced version of pullEvent(). Blocks until the computer receives an event, or if target-event is specified, will block until an instance of target-event occurs. os.pullEventRaw(target-event) returns the event and any parameters the event may have. Unlike os.pullEvent(target-event), this function will not raise an error if a 'terminate' event is received.
-	 * @tupleReturn */
-	pullEventRaw<K extends keyof os.Events>(this: void, filter?: K): [K, ...os.Events[K]]
+	/** Advanced version of pullEvent(). Blocks until the computer receives an event, or if target-event is specified, will block until an instance of target-event occurs. os.pullEventRaw(target-event) returns the event and any parameters the event may have. Unlike os.pullEvent(target-event), this function will not raise an error if a 'terminate' event is received. */
+	pullEventRaw<K extends keyof os.Events>(this: void, filter?: K): MultiReturn<[K, ...os.Events[K]]>
 
 	/** Adds an event to the event queue with the name event and the given parameters.
 	 * @vararg */
@@ -1131,13 +1113,13 @@ declare namespace peripheral {
 			getMethodsRemote(this: void, name: string): string[]
 
 			/** Has the remote peripheral execute its specified function.
-			 * @vararg @tupleReturn */
+			 * @vararg */
 			callRemote<P extends keyof Peripherals, N extends keyof Peripherals[P]>(
 				this: void,
 				name: peripheral.Name,
 				method: N,
 				...args: any[]
-			): any[]
+			): MultiReturn<any[]>
 		},
 		printer: {
 			/** Starts a new page. Returns true if page got started, false if not. */
@@ -1152,13 +1134,11 @@ declare namespace peripheral {
 			/** Sets the cursor position on the paper, works the same way as term.setCursorPos(). */
 			setCursorPos(this: void, x: number, y: number): void
 
-			/** Returns the coordinates of the cursor on the paper, works the same way as term.getCursorPos().
-			 * @tupleReturn */
-			getCursorPos(this: void,): [number, number]
+			/** Returns the coordinates of the cursor on the paper, works the same way as term.getCursorPos(). */
+			getCursorPos(this: void,): MultiReturn<[number, number]>
 
-			/** Returns the size of the paper, works the same way as term.getSize().
-			 * @tupleReturn */
-			getPageSize(this: void,): [number, number]
+			/** Returns the size of the paper, works the same way as term.getSize(). */
+			getPageSize(this: void,): MultiReturn<[number, number]>
 
 			/** Sets the title of the page. */
 			setPageTitle(this: void, title: string): void
@@ -1183,9 +1163,8 @@ declare namespace peripheral {
 			/** Set the command block's command. */
 			setCommand(this: void, command: string): void
 
-			/** Execute the command block once.
-			 * @tupleReturn */
-			runCommand(this: void,): [true, undefined] | [false, string]
+			/** Execute the command block once. */
+			runCommand(this: void,): MultiReturn<[true]> | MultiReturn<[false, string]>
 		}
 		computer: {
 			/** Turns on the Computer or Turtle. */
@@ -1240,13 +1219,13 @@ declare const peripheral: {
 	getMethods(this: void, side: peripheral.Name): (keyof peripheral.Peripherals[keyof peripheral.Peripherals])[] | undefined
 
 	/** Calls a method on a peripheral. The arguments (apart from side and method) and the return values depend on the method being called. If no peripheral is connected, returns nil.
-	 * @vararg @tupleReturn */
+	 * @vararg */
 	call<P extends keyof peripheral.Peripherals, N extends keyof peripheral.Peripherals[P]>(
 		this: void,
 		side: peripheral.Name,
 		method: N,
 		...args: any[]
-	): any[]
+	): MultiReturn<any[]>
 
 	/** Returns a table of functions, allowing you to call peripheral methods as if they were normal Lua functions. If no peripheral is connected, returns nil. */
 	wrap(this: void, side: peripheral.Name): peripheral.Peripherals[keyof peripheral.Peripherals] | undefined
@@ -1275,15 +1254,12 @@ declare const rednet: {
 	/** Sends the message to all connected and open computers. */
 	broadcast(this: void, message: any, protocol: string): void
 
-	/** Waits until a rednet message of the specified protocol has been received, or until timeout seconds have passed.
-	 * @tupleReturn */
-	receive(this: void, protocolFilter: string, timeout: number): [number, any, string]
-	/** Waits until timeout seconds have passed. Will wait that many seconds for a message of any protocol.
-	 * @tupleReturn */
-	receive(this: void, timeout: number): [number, any, string]
-	/** Waits for any message indefinitely.
-	 * @tupleReturn */
-	receive(this: void,): [number, any, string]
+	/** Waits until a rednet message of the specified protocol has been received, or until timeout seconds have passed. */
+	receive(this: void, protocolFilter: string, timeout: number): MultiReturn<[number, any, string]>
+	/** Waits until timeout seconds have passed. Will wait that many seconds for a message of any protocol. */
+	receive(this: void, timeout: number): MultiReturn<[number, any, string]>
+	/** Waits for any message indefinitely. */
+	receive(this: void,): MultiReturn<[number, any, string]>
 
 	/** Returns true if the wireless modem is open. */
 	isOpen(this: void, side: string): boolean
@@ -1294,9 +1270,8 @@ declare const rednet: {
 	/** Unregisters hostname from protocol. */
 	unhost(this: void, protocol: string, hostname: string): void
 
-	/** Searches the local network for systems registered with a matching hostname and/or protocol, and returns matching IDs found.
-	 * @tupleReturn */
-	lookup(this: void, protocol: string, hostname?: string): number[]
+	/** Searches the local network for systems registered with a matching hostname and/or protocol, and returns matching IDs found. */
+	lookup(this: void, protocol: string, hostname?: string): MultiReturn<number[]>
 
 	/** Internal use function - runs automatically and does not need to be called directly. Waits for modem_message events to appear within the event queue and generates corresponding rednet_message events for use with this API. Also responds to rednet.lookup() requests. */
 	run(this: void): void
@@ -1438,8 +1413,8 @@ declare const string: {
 	/**
 	 * Returns the internal numerical codes of the characters s[i], s[i+1], ..., s[j]. The default value for i is 1; the default value for j is i.
 	 * Note that numerical codes are not necessarily portable across platforms.
-	 * @tupleReturn */
-	byte(this: void, s: string, i?: number, j?: number): number[]
+	 */
+	byte(this: void, s: string, i?: number, j?: number): MultiReturn<number[]>
 
 	/**
 	 * Receives zero or more integers. Returns a string with length equal to the number of arguments, in which each character has the internal numerical code equal to its corresponding argument.
@@ -1453,8 +1428,8 @@ declare const string: {
 	/**
 	 * Looks for the first match of pattern in the string s. If it finds a match, then find returns the indices of s where this occurrence starts and ends; otherwise, it returns nil. A third, optional numerical argument init specifies where to start the search; its default value is 1 and can be negative. A value of true as a fourth, optional argument plain turns off the pattern matching facilities, so the function does a plain "find substring" operation, with no characters in pattern being considered "magic". Note that if plain is given, then init must be given as well.
 	 * If the pattern has captures, then in a successful match the captured values are also returned, after the two indices.
-	 * @tupleReturn */
-	find(this: void, s: string, pattern: string, init: number, plain: boolean): [undefined] | [number, number, ...string[]]
+	 */
+	find(this: void, s: string, pattern: string, init: number, plain: boolean): MultiReturn<[undefined]> | MultiReturn<[number, number, ...string[]]>
 
 	/**
 	 * Returns a formatted version of its variable number of arguments following the description given in its first argument (which must be a string). The format string follows the same rules as the printf family of standard C functions. The only differences are that the options/modifiers *, l, L, n, p, and h are not supported and that there is an extra option, q. The q option formats a string in a form suitable to be safely read back by the Lua interpreter: the string is written between double quotes, and all double quotes, newlines, embedded zeros, and backslashes in the string are correctly escaped when written. For instance, the call
@@ -1536,9 +1511,8 @@ declare const string: {
 	/** Receives a string and returns a copy of this string with all uppercase letters changed to lowercase. All other characters are left unchanged. The definition of what an uppercase letter is depends on the current locale. */
 	lower(this: void, s: string): string
 
-	/** Looks for the first match of pattern in the string s. If it finds one, then match returns the captures from the pattern; otherwise it returns nil. If pattern specifies no captures, then the whole match is returned. A third, optional numerical argument init specifies where to start the search; its default value is 1 and can be negative.
-	 * @tupleReturn */
-	match(this: void, s: string, pattern: string, init: number): [undefined] | string[]
+	/** Looks for the first match of pattern in the string s. If it finds one, then match returns the captures from the pattern; otherwise it returns nil. If pattern specifies no captures, then the whole match is returned. A third, optional numerical argument init specifies where to start the search; its default value is 1 and can be negative. */
+	match(this: void, s: string, pattern: string, init: number): MultiReturn<[undefined]> | MultiReturn<string[]>
 
 	/** Returns a string that is the concatenation of n copies of the string s. */
 	rep(this: void, s: string, n: number): string
@@ -1597,9 +1571,8 @@ declare interface Term {
 	/** Clears the line the cursor is on. */
 	clearLine(this: void): void
 
-	/** Returns two arguments containing the x and the y position of the cursor.
-	 * @tupleReturn */
-	getCursorPos(this: void): [number, number]
+	/** Returns two arguments containing the x and the y position of the cursor. */
+	getCursorPos(this: void): MultiReturn<[number, number]>
 
 	/** Sets the cursor's position. */
 	setCursorPos(this: void, x: number, y: number): void
@@ -1610,9 +1583,8 @@ declare interface Term {
 	/** Returns whether the terminal supports color. */
 	isColor(this: void): boolean
 
-	/** Returns two arguments containing the x and the y values stating the size of the screen. (Good for if you're making something to be compatible with both Turtles and Computers.)
-	 * @tupleReturn */
-	getSize(this: void): [number, number]
+	/** Returns two arguments containing the x and the y values stating the size of the screen. (Good for if you're making something to be compatible with both Turtles and Computers.) */
+	getSize(this: void): MultiReturn<[number, number]>
 
 	/** Scrolls the terminal n lines. */
 	scroll(this: void, n: number): void
@@ -1661,9 +1633,8 @@ declare interface Term {
 	/** Sets the RGB values for a color. (Override) */
 	setPaletteColor(this: void, color: colors.Color, r: number, g: number, b: number): void
 
-	/** Returns the RGB values for a color. (Override)
-	 * @tupleReturn */
-	getPaletteColor(this: void, color: colors.Color): [number, number, number]
+	/** Returns the RGB values for a color. (Override) */
+	getPaletteColor(this: void, color: colors.Color): MultiReturn<[number, number, number]>
 
 	/** Takes a screenshot. This function is rate-limited to prevent spam. */
 	screenshot(this: void): void
@@ -1695,9 +1666,8 @@ declare const term: Term & {
 
 	// CC:TWEAKED //////////////////////////////////////////////////////////////
 
-	/** Returns parts of the native color palette
-	 * @tupleReturn */
-	nativePaletteColor(this: void, color: colors.Color): [number, number, number]
+	/** Returns parts of the native color palette */
+	nativePaletteColor(this: void, color: colors.Color): MultiReturn<[number, number, number]>
 }
 
 declare const textutils: {

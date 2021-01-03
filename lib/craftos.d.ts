@@ -958,7 +958,7 @@ declare const os: {
 
 	/** An advanced way of starting programs. A started program will have a given environment table which determines what functions it has available, as well as any variables it will be able to access by default. You may prefer to use the Shell (API) unless you need to do something special.
 	 * @vararg */
-	run(this: void, environment: Map<string, any>, programPath: string, ...arguments: string[]): boolean
+	run(this: void, environment: object, programPath: string, ...arguments: string[]): boolean
 
 	/** Loads a Lua script as an API in its own namespace. It will be available to all programs that run on the terminal. */
 	loadAPI(this: void, path: string): boolean

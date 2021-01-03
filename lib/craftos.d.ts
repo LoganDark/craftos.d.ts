@@ -1585,7 +1585,7 @@ declare interface Term {
 	isColor(this: void): boolean
 
 	/** Returns two arguments containing the x and the y values stating the size of the screen. (Good for if you're making something to be compatible with both Turtles and Computers.) */
-	getSize(this: void): MultiReturn<[number, number]>
+	getSize(this: void, mode?: GraphicsMode): MultiReturn<[number, number]>
 
 	/** Scrolls the terminal n lines. */
 	scroll(this: void, n: number): void
